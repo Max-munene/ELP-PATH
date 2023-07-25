@@ -1,0 +1,31 @@
+.all {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2%;
+  width: 100%;
+  justify-content: center;
+
+  .single-card {
+    width: 22%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    border-radius: 11px;
+  }
+}
+.graphs-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: white;
+}
+.graph {
+  width: 45%;
+  margin: 2%;
+  height: 50vh;
+}

@@ -1,0 +1,37 @@
+.post {
+  background-color: white;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2%;
+  padding: 22px 0px;
+  border-radius: 10px;
+  border: 1px solid #dee2e6;
+  .post-profile-image {
+    width: 10%;
+    height: 100%;
+    img {
+      border-radius: 50%;
+      height: 100%;
+      width: 100%;
+    }
+  }
+  .post-input {
+    width: 80%;
+    display: flex;
+
+    input {
+      width: 90%;
+      height: 43px;
+      border-radius: 23px;
+      border: 1px solid var(--neutral-400, #94a3b8);
+    }
+    input::placeholder {
+      font-weight: 600;
+      color: #a32a29;
+      font-size: 14px;
+      padding-left: 10px;
+    }
+  }
+}

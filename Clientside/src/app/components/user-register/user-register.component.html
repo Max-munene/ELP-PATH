@@ -1,0 +1,101 @@
+<div class="main-container">
+  <div class="image-header"><img src="assets/images/logo2.png" /></div>
+
+  <mat-card class="register-containter">
+    <mat-card-title>
+      <div class="register-header">Register</div>
+    </mat-card-title>
+    <mat-card-content class="card-content">
+      <form class="form" #register="ngForm" (ngSubmit)="submit(register.value)">
+        <div class="names">
+          <p>
+            <mat-form-field class="form-field" appearance="outline">
+              <mat-label>First Name</mat-label>
+              <input
+                matInput
+                type="text"
+                name="firstName"
+                placeholder="First Name"
+                required
+                [(ngModel)]="firstName"
+              />
+            </mat-form-field>
+          </p>
+
+          <p>
+            <mat-form-field class="form-field" appearance="outline">
+              <mat-label>Second Name</mat-label>
+              <input
+                matInput
+                type="text"
+                name="lastName"
+                placeholder="Last Name"
+                required
+                [(ngModel)]="secondName"
+              />
+            </mat-form-field>
+          </p>
+        </div>
+        <p>
+          <mat-form-field class="form-field" appearance="outline">
+            <mat-label>Scholar Code</mat-label>
+            <input
+              matInput
+              type="text"
+              name="scholarNumber"
+              placeholder="PF No. / Scholar Code"
+              required
+              [(ngModel)]="code"
+            />
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field class="form-field" appearance="outline">
+            <mat-label>Email Address</mat-label>
+            <input
+              matInput
+              type="text"
+              name="userEmail"
+              placeholder="Email Address"
+              required
+              [(ngModel)]="email"
+            />
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field class="form-field" appearance="outline">
+            <mat-label>Password</mat-label>
+            <input
+              matInput
+              type="password"
+              name="userPassword"
+              placeholder="Enter Password"
+              [(ngModel)]="password"
+              required
+            />
+          </mat-form-field>
+        </p>
+
+        <!-- <div class="register-button"> -->
+        <button
+          class="register-button"
+          (keydown.enter)="(submit)"
+          mat-raised-button
+          color="primary"
+          type="submit"
+        >
+          Register
+        </button>
+      </form>
+      <div class="have-account-text">
+        <p>
+          Already have an account?
+          <a routerLink="">Log in</a>
+        </p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+<!-- =================================================================== -->

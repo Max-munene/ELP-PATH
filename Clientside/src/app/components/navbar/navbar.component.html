@@ -1,0 +1,39 @@
+<!-- Nav Bar -->
+<mat-toolbar color="primary" class="toolbar mat-elevation-z8">
+  <!-- Left Nav -->
+  <div class="navbar-search">
+    <div></div>
+  </div>
+
+  <!-- Right Menu -->
+  <div class="navbar-menu">
+    <!-- Home -->
+    <button routerLink="/home" mat-button><mat-icon>home</mat-icon>Home</button>
+
+    <!-- Notification -->
+    <button mat-button>
+      <mat-icon>notifications</mat-icon>
+      Notifications
+    </button>
+
+    <!-- Me Avatar Menu -->
+    <button mat-button [matMenuTriggerFor]="menu">
+      <mat-icon>account_circle</mat-icon>Me
+    </button>
+
+    <!-- Sub Menu -->
+    <mat-menu #menu="matMenu">
+      <!-- LogOut -->
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>LogOut
+      </button>
+
+      <!-- Account Settings -->
+      <button mat-menu-item>
+        <mat-icon>settings</mat-icon>Account Settings
+      </button>
+    </mat-menu>
+  </div>
+</mat-toolbar>
+
+<!-- =========================================================================== -->

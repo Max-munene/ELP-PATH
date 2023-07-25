@@ -1,0 +1,44 @@
+.leftcard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid #dee2e6;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.side-buttons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  width: 100%;
+  a {
+    text-decoration: none;
+  }
+}
+.side-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #a32a29;
+
+  line-height: 20px;
+  background: var(--neutral-100, #ffffff);
+  width: 100%;
+  border: 0.05px;
+  padding: 0.375rem 0.75rem;
+  border-radius: 2px;
+}
+.side-buttons:hover {
+  background-color: #a32a29;
+  color: white;
+}
+.side-buttons:focus {
+  background-color: #a32a29;
+  color: white;
+}
+.button-link {
+  width: 100%;
+}

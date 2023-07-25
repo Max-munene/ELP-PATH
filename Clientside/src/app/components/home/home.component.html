@@ -1,0 +1,213 @@
+<app-navbar></app-navbar>
+<div class="maincontainer">
+  <div class="homecontainer">
+    <!--first columns user profile and sibar menu (hubs,projects...)!-->
+    <div class="column-1">
+      <!--user profile card!-->
+
+      <mat-card class="leftcard">
+        <div class="profile mat-elevation-z8">
+          <img src="assets/images/profile card.png" />
+        </div>
+        <mat-card-header>
+          <mat-card-title>
+            <div class="profile-image">
+              <img src="assets/images/face.png" />
+              <h3>Phoebe Nyakio</h3>
+            </div>
+          </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+          <mat-list>
+            <mat-list-item>
+              <h4 class="profile-info">Doctor</h4>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>
+              <p class="profile-info">Year</p>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+
+            <mat-list-item>
+              <p class="profile-info">Phamacist | Othordontist</p>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
+
+      <!--sidebar menu (hubs,projects...)!-->
+      <app-side-bar-menu></app-side-bar-menu>
+    </div>
+
+    <!--second column ,update profile,start a post,feeds....!-->
+
+    <div class="column-2">
+      <!--update profile div!-->
+
+      <div class="update-profile-container mat-elevation-z8">
+        <img src="assets/images/Background.png" />
+        <p>Make yourself more discoverable</p>
+        <div class="update-profile">
+          <a routerLink="//user_profile">
+            <button mat-button class="update">Update Profile</button></a
+          >
+        </div>
+      </div>
+
+      <!--Add a post or post something div!-->
+
+      <app-post></app-post>
+
+      <!--feeds div ,includes recent posts from other users as well as hubs
+       !-->
+      <!-- feeds component -->
+
+      <app-feeds></app-feeds>
+    </div>
+
+    <!--column 3 ,has discover people to join!-->
+    <div class="column-3">
+      <div class="p-2 mat-elevation-z8">
+        <div class="add-people-header">
+          <span>Add People</span>
+        </div>
+        <!-- add people -->
+        <div class="add-people">
+          <a routerLink="/user_profile">
+            <div class="add-people-card">
+              <div class="add-people-card-profile-img">
+                <img src="assets/images/face.png" />
+              </div>
+              <div class="add-people-card-info">
+                <div class="add-people-card-info-name">
+                  <span>Kevin Tuei</span>
+                </div>
+                <div class="add-people-card-info-profession">
+                  <span>IT Specialist | Equity, Nairobi</span>
+                </div>
+              </div>
+            </div>
+          </a>
+          <!-- remove from list -->
+          <div class="add-people-remove">
+            <button>
+              <img src="assets/images/x.svg" />
+            </button>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+        <!-- add people -->
+        <div class="add-people">
+          <a routerLink="/user_profile">
+            <div class="add-people-card">
+              <div class="add-people-card-profile-img">
+                <img src="assets/images/face.png" />
+              </div>
+              <div class="add-people-card-info">
+                <div class="add-people-card-info-name">
+                  <span>Kevin Tuei</span>
+                </div>
+                <div class="add-people-card-info-profession">
+                  <span>IT Specialist | Equity, Nairobi</span>
+                </div>
+              </div>
+            </div>
+          </a>
+          <!-- remove from list -->
+          <div class="add-people-remove">
+            <button>
+              <img src="assets/images/x.svg" />
+            </button>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+
+        <!-- add people -->
+        <div class="add-people">
+          <a routerLink="/user_profile">
+            <div class="add-people-card">
+              <div class="add-people-card-profile-img">
+                <img src="assets/images/face.png" />
+              </div>
+              <div class="add-people-card-info">
+                <div class="add-people-card-info-name">
+                  <span>Kevin Tuei</span>
+                </div>
+                <div class="add-people-card-info-profession">
+                  <span>IT Specialist | Equity, Nairobi</span>
+                </div>
+              </div>
+            </div>
+          </a>
+          <!-- remove from list -->
+          <div class="add-people-remove">
+            <button>
+              <img src="assets/images/x.svg" />
+            </button>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+
+        <!-- add people -->
+        <div class="add-people">
+          <a routerLink="/user_profile">
+            <div class="add-people-card">
+              <div class="add-people-card-profile-img">
+                <img src="assets/images/face.png" />
+              </div>
+              <div class="add-people-card-info">
+                <div class="add-people-card-info-name">
+                  <span>Kevin Tuei</span>
+                </div>
+                <div class="add-people-card-info-profession">
+                  <span>IT Specialist | Equity, Nairobi</span>
+                </div>
+              </div>
+            </div>
+          </a>
+          <!-- remove from list -->
+          <div class="add-people-remove">
+            <button>
+              <img src="assets/images/x.svg" />
+            </button>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+
+        <!-- add people -->
+        <div class="add-people">
+          <a routerLink="/user_profile">
+            <div class="add-people-card">
+              <div class="add-people-card-profile-img">
+                <img src="assets/images/face.png" />
+              </div>
+              <div class="add-people-card-info">
+                <div class="add-people-card-info-name">
+                  <span>Kevin Tuei</span>
+                </div>
+                <div class="add-people-card-info-profession">
+                  <span>IT Specialist | Equity, Nairobi</span>
+                </div>
+              </div>
+            </div>
+          </a>
+          <!-- remove from list -->
+          <div class="add-people-remove">
+            <button>
+              <img src="assets/images/x.svg" />
+            </button>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+
+        <!-- more people -->
+        <a routerLink="people">
+          <div class="more-people">
+            <span> Discover More People </span>
+          </div></a
+        >
+      </div>
+    </div>
+  </div>
+</div>

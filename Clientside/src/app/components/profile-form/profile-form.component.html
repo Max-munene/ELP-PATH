@@ -1,0 +1,70 @@
+<div class="main-container">
+  <div class="container">
+    <div class="form-container">
+      <form
+        [formGroup]="profileForm"
+        class="profile-form"
+        (ngSubmit)="submit()"
+      >
+        <!-- form field -->
+        <div class="form-field">
+          <!-- label -->
+          <label class="form-label">Title*</label>
+          <!-- input -->
+          <input
+            type="text"
+            name="title"
+            placeholder="eg. Software Engineer"
+            formControlName="title"
+          />
+        </div>
+
+        <!-- form field -->
+        <div class="form-field">
+          <!-- label -->
+          <label class="form-label">Phone Number</label>
+          <!-- input -->
+          <input
+            type="text"
+            name="phoneNo"
+            placeholder="eg. 0712345678"
+            formControlName="phoneNo"
+          />
+        </div>
+
+        <!-- form field -->
+        <div class="form-field">
+          <!-- label -->
+          <label class="form-label">Email Address</label>
+          <!-- input -->
+          <input
+            type="text"
+            name="email"
+            placeholder="eg. example@elp.com"
+            formControlName="email"
+          />
+        </div>
+
+        <!-- form field -->
+        <div class="form-field">
+          <!-- label -->
+          <label class="form-label">Website Link</label>
+          <!-- input -->
+          <input
+            type="text"
+            name="website"
+            placeholder="eg. www.website.com"
+            formControlName="website"
+          />
+        </div>
+
+        <div class="save-button">
+          <button (keydown.enter)="(submit)" type="submit" class="button">
+            Save
+          </button>
+        </div>
+      </form>
+      <!-- <button (click)="getdata()">getdata</button> -->
+    </div>
+  </div>
+</div>

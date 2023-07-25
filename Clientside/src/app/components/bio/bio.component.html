@@ -1,0 +1,14 @@
+<div class="main-container">
+  <div class="edit-add">
+    <div class="edit" (click)="bformDialog()">
+      <mat-icon>edit</mat-icon>
+      <p>edit</p>
+    </div>
+
+    <div class="container">
+      <div class="bio-info" *ngFor="let bio of biodata">
+        {{ bio.description }}
+      </div>
+    </div>
+  </div>
+</div>

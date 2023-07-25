@@ -1,0 +1,57 @@
+<div class="main-container">
+  <mat-card class="login-containter">
+    <div class="image-header"><img src="assets/images/logo2.png" /></div>
+
+    <mat-card-title>
+      <div class="login-header">Login</div>
+    </mat-card-title>
+
+    <mat-card-content>
+      <form #login="ngForm" (ngSubmit)="submit(login.value)">
+        <p>
+          <mat-form-field class="form-field" appearance="outline">
+            <mat-label class="input-size">Email</mat-label>
+            <input
+              matInput
+              type="text"
+              name="userEmail"
+              required
+              autocomplete="off"
+              [(ngModel)]="email"
+            />
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input
+              matInput
+              type="password"
+              name="userPassword"
+              [(ngModel)]="password"
+              required
+              autocomplete="off"
+            />
+          </mat-form-field>
+        </p>
+
+        <div class="login-button">
+          <button
+            (keydown.enter)="(submit)"
+            mat-raised-button
+            color="primary"
+            type="submit"
+          >
+            Log in
+          </button>
+        </div>
+      </form>
+      <div class="have-account-text">
+        <p>
+          Don’t have an account?
+          <a routerLink="/register">Create Account</a>
+        </p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

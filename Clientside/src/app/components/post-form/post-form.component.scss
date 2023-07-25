@@ -1,0 +1,97 @@
+.post-container {
+  display: flex;
+  flex-direction: column;
+  border-radius: 6px;
+}
+.row-1 {
+  display: flex;
+  margin-top: 5px;
+}
+.profile-image {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    border-radius: 50%;
+  }
+}
+.exit-post {
+  width: 80%;
+  display: flex;
+  justify-content: right;
+
+  .button {
+    margin-top: 0;
+    border: none;
+
+    button {
+      background-color: white;
+      border: 0;
+    }
+  }
+  .button:hover {
+    button {
+      background-color: #94a3b8;
+    }
+  }
+}
+.post-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.post-input-text {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+  margin-bottom: 3%;
+  textarea {
+    width: 90%;
+    border-radius: 10px;
+    border: 0.05px solid var(--neutral-400, #94a3b8);
+    font-size: 14px;
+  }
+}
+.actions {
+  border-bottom: 1px solid #94a3b8;
+  display: flex;
+  margin: 0 5%;
+
+  button {
+    background-color: white;
+    color: #353434d4;
+    margin: 0;
+    border: 0;
+  }
+}
+.single-action {
+  gap: 0px;
+}
+.single-action:hover {
+  button {
+    color: #a32a29;
+  }
+}
+.send-post {
+  display: flex;
+  justify-content: right;
+
+  margin: 0.5% 5%;
+  button {
+    border: 0;
+  }
+}
+.send-post-button {
+  background-color: #a32a29;
+}
+
+.mat-mdc-button.mat-mdc-button-base {
+  background: #a32a29;
+  color: white;
+  border-radius: 10px;
+}
+.mat-mdc-button.mat-mdc-button-base:hover {
+  transform: translateY(-2px);
+}

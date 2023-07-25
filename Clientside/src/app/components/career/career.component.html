@@ -1,0 +1,32 @@
+<div class="main-container">
+  <div class="add" (click)="cformDialog()">
+    <mat-icon>add_circle_outline</mat-icon>
+    <p>Add</p>
+  </div>
+  <div class="row" *ngFor="let row of rowData">
+    <div class="container">
+      <div class="add">
+        <mat-icon>edit</mat-icon>
+        <p>Edit</p>
+      </div>
+      <div class="content">
+        <h3>{{ row.title }}</h3>
+
+        <h4>{{ row.companyName }}</h4>
+
+        <p>{{ row.description }}</p>
+
+        <div class="date">
+          <div class="start_date">
+            <label>Start Date</label>
+            <p>{{ row.start_date }}</p>
+          </div>
+          <div class="end_date">
+            <label>End Date</label>
+            <p>{{ row.end_date }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="education-contaner">
+  <!-- row 1-->
+  <div class="grades-container">
+    <!-- education header -->
+    <div class="educations-header">
+      <div class="school-name">
+        <p>School Name :</p>
+        <!-- <span>Kathwana High School</span> -->
+      </div>
+      <div class="add-grades" (click)="eduformDialog()">
+        <mat-icon>add_circle_outline</mat-icon>Add Grades
+      </div>
+    </div>
+    <!-- grade card -->
+    <div class="grade-card" *ngFor="let data of educationdata">
+      <!-- grade card column-1 -->
+      <div class="card-item">
+        <!-- column 1 -->
+        <div class="grade-card-item">
+          <p>{{ data.opening_date }}</p>
+          <p>Term{{ data.term }}</p>
+          <p>Form{{ data.form }}</p>
+        </div>
+        <!-- column 2 -->
+        <div class="grade-card-item">
+          <p>Opener Exam</p>
+          <p>{{ data.openingGrade }}</p>
+        </div>
+
+        <!-- column 3 -->
+        <div class="grade-card-item">
+          <p>Mid Term Exam</p>
+          <p>{{ data.midTermGrade }}</p>
+        </div>
+        <!-- column 4 -->
+        <div class="grade-card-item">
+          <p>Closing Exam</p>
+          <p>{{ data.closingGrade }}</p>
+        </div>
+      </div>
+      <!--  grade card column-2-->
+      <div class="card-item-button"><mat-icon>edit</mat-icon></div>
+    </div>
+    <!-- ------------------------------------------------------------------------------------------ -->
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="main-container">
+  <div class="container">
+    <div class="form-container">
+      <form
+        class="education-form"
+        (ngSubmit)="submit()"
+        enctype="multipart/form-data"
+      >
+        <!-- form field -->
+        <div class="form-field">
+          <div class="image-container">
+            <div class="image">
+              <div *ngIf="url" class="image-item">
+                <img [src]="url" alt="Image" />
+              </div>
+              <div *ngIf="!url" class="image-item">
+                <p>No image to display.</p>
+              </div>
+            </div>
+            <input
+              type="file"
+              id="imagefile"
+              style="display: none"
+              (change)="selectedFile($event)"
+            />
+            <label for="imagefile">Upload Image</label>
+          </div>
+        </div>
+
+        <div class="save-button">
+          <button type="submit" class="button">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

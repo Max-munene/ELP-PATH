@@ -1,0 +1,31 @@
+<div class="main-container">
+  <div class="add" (click)="eformDialog()">
+    <mat-icon>add_circle_outline</mat-icon>
+    <p>Add</p>
+  </div>
+  <div class="row" *ngFor="let row of rowData">
+    <div class="container">
+      <div class="add">
+        <mat-icon>edit</mat-icon>
+        <p>Edit</p>
+      </div>
+      <div class="content">
+        <h3>{{ row.school_name ? row.school_name : "Institution Name" }}</h3>
+        <h4>{{ row.course }}</h4>
+        <p>
+          <i>{{ row.grade ? row.grade : "Grade" }}</i>
+        </p>
+        <div class="date">
+          <div class="start_date">
+            <label>Start Date</label>
+            <p>{{ row.start_date }}</p>
+          </div>
+          <div class="end_date">
+            <label>End Date</label>
+            <p>{{ row.end_date ? row.end_date : "Current" }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

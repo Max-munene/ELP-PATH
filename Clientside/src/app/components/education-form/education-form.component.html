@@ -1,0 +1,70 @@
+<div class="main-container">
+  <div class="container">
+    <div class="form-container">
+      <form #eduform="ngForm" class="education-form" (ngSubmit)="submit()">
+        <!-- form field -->
+        <div class="form-field">
+          <!-- label -->
+          <label class="form-label">Institution Name </label>
+          <!-- input -->
+          <input
+            type="text"
+            name="school_name"
+            placeholder="eg. Elimu University"
+            required
+            [(ngModel)]="school_name"
+          />
+        </div>
+        <!-- form field -->
+        <div class="form-field">
+          <!-- label -->
+          <label class="form-label">Course </label>
+          <!-- input -->
+          <input
+            type="text"
+            name="course"
+            placeholder="eg. BSc. Science"
+            required
+            [(ngModel)]="course"
+          />
+        </div>
+        <!-- form field -->
+        <div class="form-field">
+          <!-- label -->
+          <label class="form-label">Grade </label>
+          <!-- input -->
+          <input
+            type="text"
+            name="grade"
+            placeholder="eg. First Class Honors, B+"
+            required
+            [(ngModel)]="grade"
+          />
+        </div>
+
+        <!-- form field -->
+        <div class="form-field">
+          <!-- label -->
+          <label class="form-label">Duration </label>
+          <!-- input  calender-->
+          <div class="calendar-input">
+            <!-- start date -->
+            <div class="date-start">
+              <label class="form-label">Start date</label>
+              <input type="date" name="start_date" [(ngModel)]="start_date" />
+            </div>
+            <!-- end date -->
+            <div class="date-end">
+              <label class="form-label">Complete date</label>
+              <input type="date" name="end_date" [(ngModel)]="end_date" />
+            </div>
+          </div>
+        </div>
+
+        <div class="save-button">
+          <button (keydown.enter)="(submit)" class="button">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
