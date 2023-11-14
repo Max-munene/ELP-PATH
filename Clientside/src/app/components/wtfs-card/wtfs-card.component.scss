@@ -19,7 +19,7 @@
   text-align: center;
   font-size: 25px;
   font-weight: 500;
-  padding: 5px 0px;
+  // padding: 5px 0px;
 }
 .icon {
   display: flex;
@@ -29,9 +29,9 @@
   border-radius: 50%;
   width: 50px;
   height: 50px;
-  background-color: rgba(1, 184, 255, 0.12);
+  background-color: #eaedf7;
 
   mat-icon {
-    color: #01b8ff;
+    color: #6259ca;
   }
 }

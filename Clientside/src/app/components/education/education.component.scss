@@ -1,55 +1,89 @@
 .main-container {
   width: 100%;
-  align-items: center;
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
-  border: 1px solid #dee2e6;
-  background-color: #f4f4f4;
+  justify-content: right;
   border-radius: 6px;
 }
 .add {
-  width: 95%;
+  background-color: #eaedf7;
+  color: #6259ca;
+  border: 0;
+  border-radius: 12px;
+  padding: 5px 6px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  margin: 10px;
+  font-size: small;
   align-items: center;
-  cursor: default;
+  .mat-icon {
+    display: flex;
+    font-size: 18px;
+    justify-content: center;
+    align-items: center;
+  }
 }
 .add:hover {
-  color: #a32a29;
-  transform: translateY(-5px);
+  // color: #a32a29;
+  transform: translateY(-2px);
 }
 .row {
-  width: 95%;
+  width: 100%;
 }
 .container {
-  border: 1px solid #dee2e6;
   width: 100%;
   background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   margin-top: 10px;
+  margin-bottom: 15px;
   border-radius: 10px;
-  box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
 }
 .content {
-  width: 90%;
+  width: 95%;
+  color: #3c4858;
+  letter-spacing: 0.3px;
+  i {
+    font-size: 14px;
+    text-transform: capitalize;
+  }
 }
+.content-title {
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: capitalize;
+}
+.content-course {
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: capitalize;
+}
+
+::ng-deep .tooltip {
+  font-size: 13px;
+}
+
 .date {
   display: flex;
   gap: 10px;
   label {
-    font-weight: bold;
+    color: #3c4858;
+    font-weight: 500;
+    font-size: 14px;
   }
   .start_date {
     gap: 10px;
     display: flex;
     align-items: center;
+    font-size: 14px;
   }
   .end_date {
     gap: 10px;
     display: flex;
     align-items: center;
+    font-size: 14px;
   }
 }

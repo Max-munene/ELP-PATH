@@ -1,31 +1,49 @@
 <div class="main-container">
-  <div class="add" (click)="eformDialog()">
-    <mat-icon>add_circle_outline</mat-icon>
-    <p>Add</p>
+  <div
+    class="add"
+    matTooltip="Add Education"
+    matTooltipPosition="left"
+    matTooltipClass="tooltip"
+    (click)="eformDialog('add')"
+    *ngIf="!viewer"
+  >
+    <mat-icon>add_circle_outline</mat-icon>Add
   </div>
   <div class="row" *ngFor="let row of rowData">
     <div class="container">
-      <div class="add">
+      <div
+        class="add"
+        matTooltip="Edit Education"
+        matTooltipPosition="left"
+        matTooltipClass="tooltip"
+        (click)="eformDialog('edit')"
+        *ngIf="!viewer"
+      >
         <mat-icon>edit</mat-icon>
-        <p>Edit</p>
       </div>
       <div class="content">
-        <h3>{{ row.school_name ? row.school_name : "Institution Name" }}</h3>
-        <h4>{{ row.course }}</h4>
+        <p class="content-title">
+          Institution Name:
+          {{
+            (row.school_name ? row.school_name : "Institution Name") | titlecase
+          }}
+        </p>
+        <p class="content-course">Course: {{ row.course | titlecase }}</p>
         <p>
-          <i>{{ row.grade ? row.grade : "Grade" }}</i>
+          <i>Grade: {{ row.grade ? row.grade : "Grade" }}</i>
         </p>
         <div class="date">
           <div class="start_date">
-            <label>Start Date</label>
-            <p>{{ row.start_date }}</p>
+            <label>Start Date: </label>
+            <p>{{ row.start_date | date }}</p>
           </div>
           <div class="end_date">
-            <label>End Date</label>
+            <label> End Date: </label>
             <p>{{ row.end_date ? row.end_date : "Current" }}</p>
           </div>
         </div>
       </div>
     </div>
+    <mat-divider></mat-divider>
   </div>
 </div>

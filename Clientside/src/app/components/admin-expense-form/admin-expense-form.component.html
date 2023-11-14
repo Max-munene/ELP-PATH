@@ -9,18 +9,6 @@
         <!-- form field -->
         <div class="form-field">
           <!-- label -->
-          <label class="form-label">Institution Name </label>
-          <!-- input -->
-          <input
-            type="text"
-            name="schoolName"
-            placeholder="eg. Elimu University"
-            formControlName="schoolName"
-          />
-        </div>
-        <!-- form field -->
-        <div class="form-field">
-          <!-- label -->
           <label class="form-label">Form </label>
 
           <!-- select -->
@@ -46,7 +34,7 @@
         <!-- form field -->
         <div class="form-field">
           <!-- label -->
-          <label class="form-label">SChool Fees </label>
+          <label class="form-label">School Fees </label>
           <!-- input -->
           <input
             type="number"
@@ -100,7 +88,7 @@
           <div class="calendar-input">
             <!-- start date -->
             <div class="date">
-              <label class="form-label">Start date</label>
+              <label class="form-label">Date Of Disbursement</label>
               <input
                 type="date"
                 name="start_date"
@@ -109,7 +97,28 @@
             </div>
           </div>
         </div>
-
+        <!-- form field -->
+        <!-- <mat-form-field appearance="outline">
+          <input
+            matInput
+            formControlName="releasedAt"
+            [matDatepicker]="releasedAtPicker"
+            (click)="releasedAtPicker.open()"
+            [disabled]="true"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="releasedAtPicker"
+            [disabled]="false"
+          >
+          </mat-datepicker-toggle>
+          <mat-datepicker
+            #releasedAtPicker
+            [disabled]="false"
+            startView="multi-year"
+          >
+          </mat-datepicker>
+        </mat-form-field> -->
         <div class="save-button">
           <button (keydown.enter)="(submit)" class="button">Save</button>
         </div>

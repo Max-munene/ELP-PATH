@@ -34,32 +34,46 @@
         <!-- form field -->
         <div class="form-field">
           <!-- label -->
-          <label class="form-label">Status </label>
+          <label class="form-label">Branch </label>
+
           <!-- select -->
-          <mat-select
-            formControlName="applicationStatus"
-            name="applicationStatus"
-          >
-            <mat-option
-              *ngFor="let status of applicationstatus"
-              [value]="status.value"
-            >
-              {{ status.viewValue }}
-            </mat-option>
-          </mat-select>
+          <div formGroupName="branch">
+            <mat-select formControlName="id" name="id">
+              <mat-option>
+                <div class="add-branch" (click)="addbranchDialog()">
+                  <mat-icon>account_balance</mat-icon>Add Branch
+                </div>
+              </mat-option>
+              <mat-option
+                *ngFor="let branch of branchOptions"
+                [value]="branch.id"
+              >
+                {{ branch.branchName | titlecase }}
+              </mat-option>
+            </mat-select>
+          </div>
         </div>
         <!-- form field -->
         <div class="form-field">
           <!-- label -->
-          <label class="form-label">Branch </label>
+          <label class="form-label">Gender</label>
+          <mat-select formControlName="applicantGender" name="id">
+            <mat-option *ngFor="let gender of genderOptions" [value]="gender">
+              {{ gender }}
+            </mat-option>
+          </mat-select>
+        </div>
 
-          <!-- select -->
-          <mat-select formControlName="branch" name="branch">
+        <!-- form field -->
+        <div class="form-field">
+          <!-- label -->
+          <label class="form-label">Location</label>
+          <mat-select formControlName="location" name="id">
             <mat-option
-              *ngFor="let branch of branchOptions"
-              [value]="branch.value"
+              *ngFor="let location of locationOptions"
+              [value]="location"
             >
-              {{ branch.viewValue }}
+              {{ location | titlecase }}
             </mat-option>
           </mat-select>
         </div>
@@ -68,6 +82,14 @@
         <div class="form-field">
           <!-- input  calender-->
           <div class="calendar-input">
+            <div class="date-start">
+              <label class="form-label"> Date Of Birth</label>
+              <input
+                type="date"
+                name="applicantDOB"
+                formControlName="applicantDOB"
+              />
+            </div>
             <!-- start date -->
             <div class="date-start">
               <label class="form-label">Application Date</label>
@@ -77,8 +99,12 @@
                 formControlName="dateOfApplication"
               />
             </div>
+
             <!-- end date -->
-            <div class="date-end">
+            <div
+              class="date-end"
+              *ngIf="applicationform.value.applicationStatus === 'AWARDED'"
+            >
               <label class="form-label">Date Awarded</label>
               <input
                 type="date"
@@ -94,7 +120,10 @@
           <!-- input  calender-->
           <div class="calendar-input">
             <!-- start date -->
-            <div class="date-start">
+            <div
+              class="date-start"
+              *ngIf="applicationform.value.applicationStatus === 'AWARDED'"
+            >
               <label class="form-label">Interview Date</label>
               <input
                 type="date"
@@ -104,9 +133,13 @@
             </div>
           </div>
         </div>
-
         <div class="save-button">
-          <button (keydown.enter)="(submit)" type="submit" class="button">
+          <button
+            (keydown.enter)="(submit)"
+            type="submit"
+            class="button"
+            [disabled]="applicationform.invalid"
+          >
             Save
           </button>
         </div>

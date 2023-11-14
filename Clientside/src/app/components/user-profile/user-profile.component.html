@@ -1,73 +1,254 @@
-<div class="user-profile-container">
-  <!-- row 1 personal info -->
-  <div class="personal-info-containter">
-    <div class="user-info">
-      <div class="profile-image">
-        <div class="image" *ngIf="imageurl">
-          <img [src]="imageurl" />
+<app-navbar></app-navbar>
+
+<div class="container">
+  <div class="user-profile-container">
+    <!-- row 1 personal info -->
+    <div class="personal-info-containter">
+      <div class="user-info">
+        <div class="profile-image">
+          <div class="image" *ngIf="imageurl">
+            <img [src]="imageurl" />
+          </div>
+          <div class="image" *ngIf="!imageurl">
+            <span><mat-icon>person</mat-icon></span>
+          </div>
+          <div class="profile-pic-edit" *ngIf="!useridparam">
+            <!-- ================Edit if image exists============= -->
+            <button
+              class="edit"
+              matTooltip="Edit photo"
+              matTooltipPosition="left"
+              matTooltipClass="tooltip"
+              (click)="picformDialog('edit')"
+              *ngIf="imageurl"
+              class="edit"
+            >
+              <mat-icon>photo_camera</mat-icon>
+            </button>
+
+            <!-- =========If there's no image Add========= -->
+            <button
+              class="add"
+              matTooltip="Add photo"
+              matTooltipPosition="left"
+              matTooltipClass="tooltip"
+              (click)="picformDialog('add')"
+              *ngIf="!imageurl"
+              class="add"
+            >
+              <mat-icon>photo_camera</mat-icon>
+            </button>
+          </div>
+          <div class="user-title">
+            <p *ngIf="profileData">
+              {{ profileData.user.firstName }} {{ profileData.user.lastName }}
+            </p>
+            <p *ngIf="!profileData">User Name</p>
+          </div>
+          <!-- <div class="add-edit">
+            <a (click)="picformDialog('edit')" *ngIf="imageurl" class="edit">
+              <mat-icon>edit</mat-icon>Edit</a
+            >
+            <a (click)="picformDialog('add')" *ngIf="!imageurl" class="add">
+              <mat-icon>add</mat-icon>Add</a
+            >
+          </div> -->
         </div>
-        <div class="image" *ngIf="!imageurl">
-          <span>No Profile Image</span>
+
+        <!-- =======================USER-DETAILS======================================= -->
+
+        <div class="user-details">
+          <div class="user-title">
+            <span *ngIf="profileData"
+              >{{ profileData.title ? profileData.title : "Title" }}
+            </span>
+            <span *ngIf="!profileData"> Title </span>
+            <!-- <span *ngIf="profileData"
+              >{{ profileData.status ? profileData.status : "" }}
+            </span>
+            <span>{{ profileData.country ? profileData.country : "" }}</span> -->
+          </div>
+
+          <div class="h-line">
+            <hr />
+          </div>
+          <div class="job">
+            <div class="contact-item">
+              <mat-icon>school</mat-icon>
+
+              <span *ngIf="profileData">{{
+                profileData.job ? profileData.job : "Scholar Category"
+              }}</span>
+              <span *ngIf="!profileData">Scholar Category</span>
+            </div>
+          </div>
+          <div class="job">
+            <div class="contact-item">
+              <mat-icon>school</mat-icon>
+
+              <span *ngIf="profileData">{{
+                profileData.scholarType
+                  ? profileData.scholarType
+                  : "Scholar Type"
+              }}</span>
+              <span *ngIf="!profileData">Scholar Type</span>
+            </div>
+          </div>
+          <div class="job">
+            <div class="contact-item">
+              <mat-icon>calendar_month</mat-icon>
+
+              <span *ngIf="profileData">{{
+                profileData.job ? profileData.job : "Scholar Year"
+              }}</span>
+              <span *ngIf="!profileData">Scholar Year</span>
+            </div>
+          </div>
+
+          <div class="user-contacts">
+            <div class="contact-item">
+              <mat-icon>account_balance</mat-icon>
+              <span *ngIf="profileData">{{
+                profileData.user.branch ? profileData.user.branch : "Branch"
+              }}</span>
+              <span *ngIf="!profileData"> Branch </span>
+              <!-- <span> Branch </span> -->
+            </div>
+          </div>
+          <div class="user-contacts">
+            <div class="contact-item">
+              <mat-icon>home_pin</mat-icon>
+              <span *ngIf="profileData">{{
+                profileData.countryOfOrigin
+                  ? profileData.countryOfOrigin
+                  : "Nationality"
+              }}</span>
+              <span *ngIf="!profileData"> Nationality </span>
+              <!-- <span> Branch </span> -->
+            </div>
+          </div>
         </div>
-        <div class="add-edit">
-          <a (click)="picformDialog('edit')" *ngIf="imageurl" class="edit">
-            <mat-icon>edit</mat-icon>Edit</a
-          >
-          <a (click)="picformDialog('add')" *ngIf="!imageurl" class="add">
-            <mat-icon>add</mat-icon>Add</a
-          >
+        <!-- ======Profile Details Cont========================================== -->
+        <!-- <div class="v-line"></div> -->
+
+        <div class="user-details-cont">
+          <div class="country">
+            <div class="contact-item">
+              <mat-icon>location_city</mat-icon>
+
+              <span *ngIf="profileData">{{
+                profileData.location ? profileData : "Country of Resisdence"
+              }}</span>
+              <span *ngIf="!profileData">Country of Resisdence</span>
+            </div>
+          </div>
+          <div class="country">
+            <div class="contact-item">
+              <mat-icon>place</mat-icon>
+
+              <span *ngIf="profileData">{{
+                profileData.location ? profileData : "City"
+              }}</span>
+              <span *ngIf="!profileData">City of Resisdence</span>
+            </div>
+          </div>
+
+          <div class="user-contacts">
+            <div class="contact-item">
+              <mat-icon>work_outline</mat-icon>
+
+              <span *ngIf="profileData">{{
+                profileData.job ? profileData.job : "Job Status"
+              }}</span>
+              <span *ngIf="!profileData">Job Status</span>
+            </div>
+            <div class="contact-item">
+              <mat-icon>phone</mat-icon>
+              <span *ngIf="profileData">{{
+                profileData.phoneNo ? profileData.phoneNo : "Phone Number"
+              }}</span>
+              <span *ngIf="!profileData"> Phone Number </span>
+            </div>
+
+            <div class="contact-item">
+              <mat-icon>email</mat-icon>
+              <span *ngIf="profileData"> {{ profileData.user.userEmail }}</span>
+
+              <span *ngIf="!profileData"> Email</span>
+            </div>
+            <div class="contact-item">
+              <mat-icon>link</mat-icon>
+              <span *ngIf="profileData">
+                {{
+                  profileData.website ? profileData.website : "WebLink"
+                }}</span
+              >
+              <span *ngIf="!profileData"> Web Link</span>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="user-details">
-        <div class="add-edit">
-          <a (click)="pformDialog('edit')" class="edit" *ngIf="profileData">
-            <mat-icon>edit</mat-icon>Edit</a
-          >
-          <a (click)="pformDialog('add')" class="add" *ngIf="!profileData">
-            <mat-icon>add</mat-icon>Add</a
-          >
-        </div>
-        <div class="user-title">
-          <p *ngIf="userInfo">
-            {{ userInfo.firstName }} {{ userInfo.lastName }}
-          </p>
-          <p *ngIf="!userInfo">User Name</p>
-          <span *ngIf="profileData"
-            >{{ profileData.title ? profileData.title : "Title" }}
-          </span>
-          <span *ngIf="!profileData"> Title </span>
-        </div>
-
-        <div class="h-line">
-          <hr />
-        </div>
-
-        <div class="user-contacts">
-          <div class="contact-item">
-            <mat-icon>phone</mat-icon>
-            <span *ngIf="profileData">{{ profileData.phoneNo }}</span>
-            <span *ngIf="!profileData"> Phone Number </span>
-          </div>
-
-          <div class="contact-item">
-            <mat-icon>email</mat-icon>
-            <span *ngIf="profileData"> {{ profileData.email }}</span>
-
-            <span *ngIf="!profileData"> Email Address</span>
-          </div>
-          <div class="contact-item">
-            <mat-icon>link</mat-icon>
-            <span *ngIf="profileData"> {{ profileData.website }}</span>
-            <span *ngIf="!profileData"> Web Link</span>
-          </div>
-        </div>
+      <div class="add-edit" *ngIf="!useridparam">
+        <a
+          matTooltip="Edit"
+          matTooltipPosition="left"
+          matTooltipClass="tooltip"
+          (click)="pformDialog('edit')"
+          class="edit"
+          *ngIf="profileData"
+        >
+          <mat-icon>edit</mat-icon>Edit</a
+        >
+        <a
+          matTooltip="Add"
+          matTooltipPosition="left"
+          matTooltipClass="tooltip"
+          (click)="pformDialog('add')"
+          class="add"
+          *ngIf="!profileData"
+        >
+          <mat-icon>add</mat-icon>Add</a
+        >
       </div>
-    </div>
-    <div class="v-line"></div>
-    <div class="user-social-links">
+
+      <!-- ================================SOCIAL-LINKS=================================== -->
+      <!-- <div class="v-line"></div> -->
+      <div class="user-social-links">
+        <a href="https://www.linkedIn.com" class="social-link">
+          <img src="assets/images/ln.svg" />
+          <span>LinkedIn</span>
+        </a>
+        <a href="https://www.facebook.com" class="social-link">
+          <img src="assets/images/fb.svg" />
+          <span>Facebook</span>
+        </a>
+        <a href="https://www.instagram.com" class="social-link">
+          <img src="assets/images/ig.svg" height="25" />
+          <span>Instagram</span>
+        </a>
+        <a href="https://www.twitter.com" class="social-link">
+          <img src="assets/images/tw.svg" />
+          <span>Twitter</span>
+        </a>
+        <a href="https://www.github.com" class="social-link">
+          <img src="assets/images/git.svg" />
+          <span>Github</span>
+        </a>
+        <a href="https://www.baobabplatform.org/" class="social-link">
+          <img
+            src="assets/images/cobrand-logo-14c0bc87 1.jpg"
+            width="25px"
+            height="25px"
+          />
+          <span>Baobab</span>
+        </a>
+      </div>
       <div class="social-link-add-edit">
-        <div class="add-edit">
+        <div class="add-edit" *ngIf="!useridparam">
           <a
+            matTooltip="Edit"
+            matTooltipPosition="left"
+            matTooltipClass="tooltip"
             (click)="sformDialog('edit')"
             *ngIf="social_profileData"
             class="edit"
@@ -75,6 +256,9 @@
             <mat-icon>edit</mat-icon>Edit</a
           >
           <a
+            matTooltip="Add"
+            matTooltipPosition="left"
+            matTooltipClass="tooltip"
             (click)="sformDialog('add')"
             *ngIf="!social_profileData"
             class="add"
@@ -83,80 +267,86 @@
           >
         </div>
       </div>
+    </div>
 
-      <div class="social-link">
-        <img src="assets/images/ln.svg" />
-        <span>LinkedIn</span>
-      </div>
-      <div class="social-link">
-        <img src="assets/images/fb.svg" />
-        <span>Facebook</span>
-      </div>
-      <div class="social-link">
-        <img src="assets/images/ig.svg" height="25" />
-        <span>Instagram</span>
-      </div>
-      <div class="social-link">
-        <img src="assets/images/tw.svg" />
-        <span>Twitter</span>
-      </div>
-      <div class="social-link">
-        <img src="assets/images/git.svg" />
-        <span>Github</span>
-      </div>
-    </div>
-  </div>
+    <!-- row 2 tabs -->
 
-  <!-- row 2 tabs -->
+    <!-- ===========================TABS============================== -->
 
-  <div class="card-tab-container">
-    <!-- single card tab bio -->
-    <div class="single-card-tab" (click)="showTab('bio')">
-      <div class="tab-content">
-        <div class="tab-icon"><mat-icon>assignment</mat-icon></div>
-        <div class="tab-text">Bio</div>
-      </div>
+    <div class="card-tab-container">
+      <!-- single card tab bio -->
+      <button class="single-card-tab" (click)="showTab('bio')">
+        <div class="tab-content">
+          <div class="tab-icon"><mat-icon>assignment</mat-icon></div>
+          <div class="tab-text">Bio</div>
+        </div>
+      </button>
+      <!-- single card tab education -->
+      <button class="single-card-tab" (click)="showTab('education')">
+        <div class="tab-content">
+          <div class="tab-icon"><mat-icon>school</mat-icon></div>
+          <div class="tab-text">Education</div>
+        </div>
+      </button>
+      <!-- single card tab career -->
+      <button class="single-card-tab" (click)="showTab('career')">
+        <div class="tab-content">
+          <div class="tab-icon"><mat-icon>card_travel</mat-icon></div>
+          <div class="tab-text">Career</div>
+        </div>
+      </button>
+      <!-- single card tab Skills-->
+      <button class="single-card-tab" (click)="showTab('skills')">
+        <div class="tab-content">
+          <div class="tab-icon"><mat-icon>engineering</mat-icon></div>
+          <div class="tab-text">Skills</div>
+        </div>
+      </button>
+      <!-- single card tab post -->
+      <!-- <button class="single-card-tab">
+        <div class="tab-content">
+          <div class="tab-icon"><mat-icon>edit_notes</mat-icon></div>
+          <div class="tab-text">Posts</div>
+        </div>
+      </button> -->
     </div>
-    <!-- single card tab education -->
-    <div class="single-card-tab" (click)="showTab('education')">
-      <div class="tab-content">
-        <div class="tab-icon"><mat-icon>school</mat-icon></div>
-        <div class="tab-text">Education</div>
-      </div>
-    </div>
-    <!-- single card tab career -->
-    <div class="single-card-tab" (click)="showTab('career')">
-      <div class="tab-content">
-        <div class="tab-icon"><mat-icon>card_travel</mat-icon></div>
-        <div class="tab-text">Career</div>
-      </div>
-    </div>
-    <!-- single card tab hubs-->
-    <div class="single-card-tab">
-      <div class="tab-content">
-        <div class="tab-icon"><mat-icon>groups</mat-icon></div>
-        <div class="tab-text">Hubs</div>
-      </div>
-    </div>
-    <!-- single card tab post -->
-    <div class="single-card-tab">
-      <div class="tab-content">
-        <div class="tab-icon"><mat-icon>edit_notes</mat-icon></div>
-        <div class="tab-text">Posts</div>
-      </div>
-    </div>
-  </div>
-  <!-- row 3 tab body -->
-  <div class="tab-body">
-    <ng-container *ngIf="activeTab === 'bio'">
-      <app-bio></app-bio>
-    </ng-container>
 
-    <ng-container *ngIf="activeTab === 'education'">
-      <app-education></app-education>
-    </ng-container>
-    <ng-container *ngIf="activeTab === 'career'">
-      <app-career></app-career>
-    </ng-container>
+    <!-- -======- row 3 tab body -=======================================-> -->
+    <div class="tab-body">
+      <ng-container *ngIf="activeTab === 'bio'">
+        <app-bio *ngIf="!useridparam"></app-bio>
+        <app-bio
+          [userIdadmin]="userid"
+          [viewer]="userid"
+          *ngIf="useridparam"
+        ></app-bio>
+      </ng-container>
+
+      <ng-container *ngIf="activeTab === 'education'">
+        <app-education *ngIf="!useridparam"></app-education>
+
+        <app-education
+          [userIdadmin]="userid"
+          [viewer]="userid"
+          *ngIf="useridparam"
+        ></app-education>
+      </ng-container>
+      <ng-container *ngIf="activeTab === 'career'">
+        <!--  -->
+        <app-career *ngIf="!useridparam"></app-career>
+        <!--  -->
+        <app-career
+          [userIdadmin]="userid"
+          [viewer]="userid"
+          *ngIf="useridparam"
+        ></app-career>
+      </ng-container>
+      <ng-container *ngIf="activeTab === 'skills'">
+        <!--  -->
+        <app-skills *ngIf="!useridparam"></app-skills>
+        <!--  -->
+        <app-skills [skillsData]="skillsData"></app-skills>
+      </ng-container>
+    </div>
   </div>
 </div>

@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { HttpServiceService } from 'src/app/services/http-service.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormBuilder, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-profile-pic',
   templateUrl: './profile-pic.component.html',
@@ -9,80 +10,130 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class ProfilePicComponent {
   constructor(
     public http: HttpServiceService,
+    public fb: FormBuilder,
     public dialogRef: MatDialogRef<ProfilePicComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
-  url!: string;
+  profileForm!: FormGroup;
+  profileData!: any;
   userId!: string;
-  imageId!: string;
-  file!: File;
-  formData = new FormData();
-  urlAddImage!: string;
-  urlUpdateImage!: string;
-  urlGetImage!: string;
-  ngOnInit() {
-    const storedData = localStorage.getItem('userData');
+  urlAddProfile!: string;
+  urlUpdateProfile!: string;
+  urlGetProfile!: string;
+  imageUrl!: string;
+  selectedImage!: File;
 
-    if (storedData) {
-      const parsedData = JSON.parse(storedData);
-      this.userId = parsedData.id;
+  // Initialize function runs when the component is first loaded in the DOM
+  ngOnInit() {
+    // Create a reactive form using FormBuilder
+    this.profileForm = this.fb.group({
+      title: [''],
+      website: [''],
+      phoneNo: [''],
+      email: [''],
+      profileImageFile: [null],
+    });
+
+    // Retrieve user data from local storage
+    const userData = localStorage.getItem('userData');
+    if (userData) {
+      const parsedData = JSON.parse(userData);
       // Use the parsed data in your application
-      this.urlGetImage = this.http.serverUrl + 'image/' + this.userId + '/view';
-      // ============================get image data (url)================================================
-      this.http.getImage(this.urlGetImage).subscribe({
-        next: (response: any) => {
-          const responsedata: any = JSON.parse(response);
-          this.urlUpdateImage =
-            this.http.serverUrl + 'image/' + this.userId + '/update';
-          console.log(responsedata);
-        },
-        error: (error) => {
-          if (error.error === 'Image not found.') {
-            console.log(error.error);
-            this.urlAddImage =
-              this.http.serverUrl + 'image/' + this.userId + '/add';
-          }
-          // Handle the error here
-        },
-        complete: () => {},
-      });
-      console.log(this.data);
+      this.userId = parsedData.id;
+      this.getprofileData();
     }
   }
-  selectedFile(event: any) {
-    const reader = new FileReader();
-    this.file = event.target.files[0];
-    this.formData.append('file', this.file);
-    console.log(this.file);
-    reader.readAsDataURL(this.file);
-    reader.onload = (event: any) => {
-      this.url = event.target.result;
-    };
+
+  // method to handle selected image
+  onFileChange(event: any) {
+    if (event.target.files && event.target.files.length) {
+      this.selectedImage = event.target.files[0];
+      this.profileForm
+        .get('profileImageFile')
+        ?.setValue(this.selectedImage as any);
+      console.log(this.profileForm.value.profileImageFile);
+      // Assuming you want to display a preview of the selected image
+      const reader = new FileReader();
+      reader.readAsDataURL(this.selectedImage);
+      reader.onload = (e: any) => {
+        this.imageUrl = e.target.result;
+      };
+    }
   }
 
+  // method to Fetch profile data from the server
+  getprofileData() {
+    // Set URLs to get profile data
+    this.urlGetProfile =
+      this.http.serverUrl + 'profile/' + this.userId + '/view';
+    // Fetch profile data from the server
+    this.http.getData(this.urlGetProfile).subscribe({
+      next: (response) => {
+        this.profileData = response.payload;
+        // Set URLs for updating profile data
+        this.urlUpdateProfile =
+          this.http.serverUrl + 'profile/' + this.profileData.id + '/update';
+
+        // Prepopulate the form with data from the API response
+        this.profileForm.patchValue({
+          title: this.profileData.title,
+          website: this.profileData.website,
+          phoneNo: this.profileData.phoneNo,
+          email: this.profileData.email,
+        });
+
+        // Convert and display profile image
+        if (this.profileData.profileImage !== null) {
+          this.imageUrl = this.profileData.profileImage;
+        }
+      },
+      error: (error) => {
+        console.log('Error:', error);
+        this.urlAddProfile =
+          this.http.serverUrl + 'profile/' + this.userId + '/create';
+        console.log('create url', this.urlAddProfile);
+        // Handle the error here
+      },
+      complete: () => {},
+    });
+  }
+
+  // Method to submit the form data
   submit() {
-    if (this.data.data === 'edit') {
-      this.http.putData(this.urlUpdateImage, this.formData).subscribe({
-        next: (response) => {
-          console.log('Put Request successful');
+    console.log('this ON submit', this.urlUpdateProfile);
+
+    const formData = new FormData();
+
+    // add all the activityForm control to the form data object
+    Object.keys(this.profileForm.controls).forEach((controlName) => {
+      formData.append(controlName, this.profileForm.get(controlName)?.value);
+    });
+
+    // =================================add profile================================================
+
+    if (this.data.editAdd === 'add' || this.data === 'add') {
+      this.http.postData(this.urlAddProfile, formData).subscribe({
+        next: () => {
           this.dialogRef.close();
         },
         error: (error) => {
           console.log('Error:', error);
+          // this.dialogRef.close();
           // Handle the error here
         },
         complete: () => {},
       });
-    } else {
-      this.http.postData(this.urlAddImage, this.formData).subscribe({
-        next: (response) => {
-          console.log('Post Request successful');
+    }
 
+    // =====================================edit profle====================================
+    else if (this.data?.editAdd === 'edit' || this.data.data === 'edit') {
+      console.log(this.urlUpdateProfile);
+      this.http.putData(this.urlUpdateProfile, formData).subscribe({
+        next: () => {
           this.dialogRef.close();
         },
-        error: (error) => {
-          console.log('Error:', error);
-          // Handle the error here
+        error: (response) => {
+          console.log('Error:', response);
         },
         complete: () => {},
       });

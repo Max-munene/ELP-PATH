@@ -1,4 +1,31 @@
-<div class="p-2 mat-elevation-z8">
+<div class="p-2" [class.no-update]="userProfileData !== undefined">
+  <div class="feed-container" *ngFor="let data of feedsData">
+    <div class="feed-header">
+      <div class="feed-header-profile">
+        <div class="feed-header-profile-image">
+          <img [src]="data.userImage" />
+        </div>
+        <div class="feed-header-profile-name">
+          <span>{{ data.firstName }} {{ data.lastName }}</span>
+          <p>{{ data.feedDate }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="feed-body">
+      <div class="feed-text">
+        <p>
+          {{ data.feedText }}
+        </p>
+      </div>
+      <div class="feed-image" *ngIf="data.feedImage !== null">
+        <img [src]="data.feedImage" />
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+  </div>
+</div>
+
+<!-- <div class="p-2 mat-elevation-z8">
   <div class="feed-container">
     <div class="feed-header">
       <div class="feed-header-profile">
@@ -23,20 +50,7 @@
       <div class="feed-image">
         <img src="assets/images/m.png" />
       </div>
-      <div class="feed-action">
-        <button>
-          <img src="assets/images/like.svg" />
-          Like
-        </button>
-        <button>
-          <img src="assets/images/message.svg" />
-          Comment
-        </button>
-        <button>
-          <img src="assets/images/share.svg" />
-          Share
-        </button>
-      </div>
     </div>
+    <mat-divider></mat-divider>
   </div>
-</div>
+</div> -->

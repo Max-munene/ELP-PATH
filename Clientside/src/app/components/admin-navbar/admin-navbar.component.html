@@ -1,25 +1,124 @@
-<mat-toolbar color="primary" class="toolbar mat-elevation-z8">
-  <div class="navbar-search">
-    <div>
-      <img src="assets/images/equity-bank-logo.png" />
-    </div>
-    <!-- <mat-form-field appearance="outline" class="form-field">
+<!-- <mat-toolbar color="primary" class="toolbar mat-elevation-z8">
+  <p>
+    <mat-icon
+      mat-button
+      matTooltip="Menu"
+      matTooltipPosition="below"
+      matTooltipClass="tooltip"
+      (click)="toggleButton()"
+    >
+      menu
+    </mat-icon>
+  </p>
+
+  <div class="nav">
+    <div class="navbar-search">
+      <div>
+        <img src="assets/images/equity-bank-logo.png" />
+      </div> -->
+<!-- <mat-form-field appearance="outline" class="form-field">
       <input matInput placeholder="Search" required />
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field> -->
-  </div>
-  <div class="navbar-menu">
-    <div class="menu-item">
-      <button mat-button>
-        <mat-icon>notifications</mat-icon>
-        Notifications
-      </button>
-    </div>
+<!-- </div>
+    <div class="navbar-menu">
+      <a routerLink="/home" class="menu-item">
+        <button mat-button>
+          <mat-icon>home</mat-icon>
+          Home
+        </button>
+      </a>
 
-    <div class="menu-item">
-      <button mat-button><mat-icon>exit_to_app</mat-icon>LogOut</button>
+      <div class="menu-item">
+        <button mat-button>
+          <mat-icon>notifications</mat-icon>
+          Notifications
+        </button>
+      </div>
+
+      <div class="menu-item">
+        <button mat-button (click)="logout()">
+          <mat-icon>exit_to_app</mat-icon>LogOut
+        </button>
+      </div>
     </div>
   </div>
-</mat-toolbar>
+</mat-toolbar> -->
 
 <!-- =========================================================================== -->
+
+<!-- Nav Bar -->
+<div class="container">
+<nav color="" class="nav">
+  <!-- Left Nav -->
+
+  <div class="navbar-search">
+    <img
+      src="assets/images/equity-bank-logo.png"
+      (click)="toggleButton()"
+    />
+
+    <form action="" method="GET" class="lg:hidden block">
+      <label for="Search" class=""></label>
+      <div class="searchMain">
+        <div class="imageSearch">
+          <svg
+            class="searchSvg"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+        </div>
+        <input
+        (keyup)="applyFilter($event)"
+        matInput
+        placeholder="Filter"
+      />
+          </div>
+    </form>
+  </div>
+
+  <!-- Right Menu -->
+  <div class="navbar-menu">
+    <!-- Home -->
+    <button routerLink="/home" mat-button>
+      <mat-icon>home</mat-icon><span class="nav-item">Home</span>
+    </button>
+
+    <!-- Notification -->
+    <button mat-button>
+      <mat-icon>notifications</mat-icon
+      ><span class="nav-item"> Notifications</span>
+    </button>
+
+    <!-- Me Avatar Menu -->
+    <button mat-button [matMenuTriggerFor]="menu">
+      <mat-icon>account_circle</mat-icon><span class="nav-item">Me</span>
+    </button>
+
+    <!-- Sub Menu -->
+    <mat-menu #menu="matMenu">
+      <!-- LogOut -->
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>LogOut
+      </button>
+
+      <!-- Account Settings -->
+      <button mat-menu-item routerLink="/user_profile">
+        <mat-icon>person</mat-icon>Profile
+      </button>
+      <button mat-menu-item>
+        <mat-icon>settings</mat-icon>AccountSettings
+      </button>
+    </mat-menu>
+  </div>
+
+  <!-- =========================================================================== -->
+</nav>
+</div>

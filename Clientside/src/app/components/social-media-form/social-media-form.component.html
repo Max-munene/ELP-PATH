@@ -1,9 +1,16 @@
 <div class="main-container">
+  <div class="exit-post">
+    <div class="button">
+      <button mat-dialog-close matTooltip="Close" matTooltipClass="close">
+        <img src="assets/images/x.svg" height="20" />
+      </button>
+    </div>
+  </div>
   <div class="container">
     <div class="form-container">
       <form [formGroup]="socialForm" class="social-form" (ngSubmit)="submit()">
         <!-- form field -->
-        <div class="form-field">
+        <div class="form-field"><span>Social Media links</span>
           <!-- label -->
           <label class="form-label">Facebook</label>
           <!-- input -->
@@ -65,6 +72,18 @@
             placeholder="eg. www.profile.com"
             required
             formControlName="instagram"
+          />
+        </div>
+        <div class="form-field">
+          <!-- label -->
+          <label class="form-label">Baobab Platform </label>
+          <!-- input -->
+          <input
+            type="text"
+            name="baobab"
+            placeholder="eg. www.profile.com"
+            required
+            formControlName="baobab"
           />
         </div>
 

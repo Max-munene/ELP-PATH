@@ -1,9 +1,16 @@
 <div class="main-container">
+  <div class="exit-post">
+    <div class="button">
+      <button mat-dialog-close matTooltip="Close" matTooltipClass="close">
+        <img src="assets/images/x.svg" height="20" />
+      </button>
+    </div>
+  </div>
   <div class="container">
     <div class="form-container">
       <form #careerform="ngForm" class="education-form" (ngSubmit)="submit()">
         <!-- form field -->
-        <div class="form-field">
+        <div class="form-field"><span>Add Career</span>
           <!-- label -->
           <label class="form-label">Company Name .</label>
           <!-- input -->

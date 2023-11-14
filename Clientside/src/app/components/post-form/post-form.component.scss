@@ -1,25 +1,49 @@
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+  border-radius: 6px;
+}
+
 .post-container {
   display: flex;
   flex-direction: column;
-  border-radius: 6px;
+  overflow: hidden;
 }
 .row-1 {
   display: flex;
   margin-top: 5px;
 }
 .profile-image {
+  margin-top: 15px;
   width: 20%;
   display: flex;
   justify-content: center;
   align-items: center;
-  img {
+  .image {
     border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    background-color: #eaedf7;
+    img {
+      border-radius: 50%;
+      height: 50px;
+      width: 50px;
+    }
+    .mat-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-size: 30px;
+      color: #515050;
+    }
   }
 }
 .exit-post {
   width: 80%;
   display: flex;
   justify-content: right;
+  margin-right: 5px, 5px;
 
   .button {
     margin-top: 0;
@@ -32,7 +56,7 @@
   }
   .button:hover {
     button {
-      background-color: #94a3b8;
+      background-color: #ffffff;
     }
   }
 }
@@ -49,9 +73,17 @@
   margin-bottom: 3%;
   textarea {
     width: 90%;
-    border-radius: 10px;
+    padding-left: 10px;
+    border-radius: 6px;
     border: 0.05px solid var(--neutral-400, #94a3b8);
     font-size: 14px;
+    overflow: hidden;
+    .placeholder {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+  }
+  textarea:focus {
+    outline: none;
   }
 }
 .actions {
@@ -59,18 +91,38 @@
   display: flex;
   margin: 0 5%;
 
-  button {
-    background-color: white;
+  label {
     color: #353434d4;
     margin: 0;
     border: 0;
+    .mat-icon {
+      font-size: 25px;
+    }
   }
 }
+.single-action {
+  width: 100%;
+}
+
+.image-item {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  border-radius: 11px;
+  img {
+    margin-top: 10px;
+    border-radius: 11px;
+    height: 40vh;
+    width: 100%;
+    object-fit: fill;
+  }
+}
+
 .single-action {
   gap: 0px;
 }
 .single-action:hover {
-  button {
+  label {
     color: #a32a29;
   }
 }
@@ -78,9 +130,12 @@
   display: flex;
   justify-content: right;
 
-  margin: 0.5% 5%;
+  margin: 1% 5%;
   button {
     border: 0;
+    .mat-icon {
+      font-size: 13px;
+    }
   }
 }
 .send-post-button {
@@ -90,8 +145,25 @@
 .mat-mdc-button.mat-mdc-button-base {
   background: #a32a29;
   color: white;
-  border-radius: 10px;
+  border-radius: 6px;
 }
 .mat-mdc-button.mat-mdc-button-base:hover {
-  transform: translateY(-2px);
+  transform: translateY(-1px);
+}
+
+::ng-deep .close {
+  font-size: 13px;
+}
+// ::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+//   /*-------media query for mobile screen-------*/
+//   @media only screen and (max-width: 600px) {
+//     width: 100%;
+//   }
+// }
+
+::ng-deep .dialog-responsive {
+  /*-------media query for mobile screen-------*/
+  @media only screen and (max-width: 600px) {
+    width: 100% !important;
+  }
 }

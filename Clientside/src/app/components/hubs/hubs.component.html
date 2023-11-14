@@ -1,192 +1,45 @@
-<app-navbar></app-navbar>
-<div class="hubs-maincontainer">
-  <div class="hubs-homecontainer">
-    <div class="hubs-column-1">
-      <app-side-bar-menu></app-side-bar-menu>
+<div class="all-hubs">
+  <!-- single hubcard -->
+  <div class="cards-hub" *ngFor="let data of chapterData">
+    <!-- <img src="assets/images/Card background.png" /> -->
+
+    <a
+      class="hub-profile-image"
+      [routerLink]="['/sidebarhome/chapterhome', data.chapterId]"
+    >
+      <img [src]="data.imageUrl" />
+    </a>
+    <div class="hub-profile-title">
+      <span>{{ data.chapterName | titlecase }}</span>
     </div>
-    <div class="hubs-column-2">
-      <div class="all-hubs">
-        <!-- single hubcard -->
-        <div class="cards-hub">
-          <img src="assets/images/Card background.png" />
+    <div class="hub-details">
+      <p>
+        {{ data.chapterDescription | titlecase }}
+      </p>
+    </div>
+    <div class="join" *ngIf="data.chapterMember === 'no'">
+      <!-- <a
+              [routerLink]="['/admin/chapterhome', data.chapterId]"
+              class="view"
+            > -->
+      <button class="join-button" (click)="joinChapter(data.chapterId)">
+        <!-- <mat-icon>add_circle_outline</mat-icon> -->
+        Join
+      </button>
 
-          <div class="hub-profile-image">
-            <img src="assets/images/face.png" />
-            <span>Engineering Hub</span>
-          </div>
-          <div class="hub-details">
-            <p>
-              Everything Engineering | Construction | Electrical | Mechanical
-            </p>
-          </div>
-          <div class="join">
-            <button class="join-button">
-              <img src="assets/images/Icon.svg" />
-              <span>join</span>
-            </button>
-          </div>
-        </div>
-        <!-- single hubcard -->
-        <div class="cards-hub">
-          <img src="assets/images/Card background.png" />
+      <!-- </a> -->
+    </div>
 
-          <div class="hub-profile-image">
-            <img src="assets/images/face.png" />
-            <span>Engineering Hub</span>
-          </div>
-          <div class="hub-details">
-            <p>
-              Everything Engineering | Construction | Electrical | Mechanical
-            </p>
-          </div>
-          <div class="join">
-            <button class="join-button">
-              <img src="assets/images/Icon.svg" />
-              <span>join</span>
-            </button>
-          </div>
-        </div>
-        <!-- single hubcard -->
-        <div class="cards-hub">
-          <img src="assets/images/Card background.png" />
-
-          <div class="hub-profile-image">
-            <img src="assets/images/face.png" />
-            <span>Engineering Hub</span>
-          </div>
-          <div class="hub-details">
-            <p>
-              Everything Engineering | Construction | Electrical | Mechanical
-            </p>
-          </div>
-          <div class="join">
-            <button class="join-button">
-              <img src="assets/images/Icon.svg" />
-              <span>join</span>
-            </button>
-          </div>
-        </div>
-        <!-- single hubcard -->
-        <div class="cards-hub">
-          <img src="assets/images/Card background.png" />
-
-          <div class="hub-profile-image">
-            <img src="assets/images/face.png" />
-            <span>Engineering Hub</span>
-          </div>
-          <div class="hub-details">
-            <p>
-              Everything Engineering | Construction | Electrical | Mechanical
-            </p>
-          </div>
-          <div class="join">
-            <button class="join-button">
-              <img src="assets/images/Icon.svg" />
-              <span>join</span>
-            </button>
-          </div>
-        </div>
-        <!-- single hubcard -->
-        <div class="cards-hub">
-          <img src="assets/images/Card background.png" />
-
-          <div class="hub-profile-image">
-            <img src="assets/images/face.png" />
-            <span>Engineering Hub</span>
-          </div>
-          <div class="hub-details">
-            <p>
-              Everything Engineering | Construction | Electrical | Mechanical
-            </p>
-          </div>
-          <div class="join">
-            <button class="join-button">
-              <img src="assets/images/Icon.svg" />
-              <span>join</span>
-            </button>
-          </div>
-        </div>
-        <!-- single hubcard -->
-        <div class="cards-hub">
-          <img src="assets/images/Card background.png" />
-
-          <div class="hub-profile-image">
-            <img src="assets/images/face.png" />
-            <span>Engineering Hub</span>
-          </div>
-          <div class="hub-details">
-            <p>
-              Everything Engineering | Construction | Electrical | Mechanical
-            </p>
-          </div>
-          <div class="join">
-            <button class="join-button">
-              <img src="assets/images/Icon.svg" />
-              <span>join</span>
-            </button>
-          </div>
-        </div>
-        <!-- single hubcard -->
-        <div class="cards-hub">
-          <img src="assets/images/Card background.png" />
-
-          <div class="hub-profile-image">
-            <img src="assets/images/face.png" />
-            <span>Engineering Hub</span>
-          </div>
-          <div class="hub-details">
-            <p>
-              Everything Engineering | Construction | Electrical | Mechanical
-            </p>
-          </div>
-          <div class="join">
-            <button class="join-button">
-              <img src="assets/images/Icon.svg" />
-              <span>join</span>
-            </button>
-          </div>
-        </div>
-        <!-- single hubcard -->
-        <div class="cards-hub">
-          <img src="assets/images/Card background.png" />
-
-          <div class="hub-profile-image">
-            <img src="assets/images/face.png" />
-            <span>Engineering Hub</span>
-          </div>
-          <div class="hub-details">
-            <p>
-              Everything Engineering | Construction | Electrical | Mechanical
-            </p>
-          </div>
-          <div class="join">
-            <button class="join-button">
-              <img src="assets/images/Icon.svg" />
-              <span>join</span>
-            </button>
-          </div>
-        </div>
-        <!-- single hubcard -->
-        <div class="cards-hub">
-          <img src="assets/images/Card background.png" />
-
-          <div class="hub-profile-image">
-            <img src="assets/images/face.png" />
-            <span>Engineering Hub</span>
-          </div>
-          <div class="hub-details">
-            <p>
-              Everything Engineering | Construction | Electrical | Mechanical
-            </p>
-          </div>
-          <div class="join">
-            <button class="join-button">
-              <img src="assets/images/Icon.svg" />
-              <span>join</span>
-            </button>
-          </div>
-        </div>
-      </div>
+    <div class="join" *ngIf="data.chapterMember === 'yes'">
+      <!-- <a
+              [routerLink]="['/admin/chapterhome', data.chapterId]"
+              class="view"
+            > -->
+      <button class="join-button" (click)="leaveChapter(data.chapterId)">
+        <!-- <mat-icon>remove_circle_outline</mat-icon> -->
+        <span>Leave</span>
+      </button>
+      <!-- </a> -->
     </div>
   </div>
 </div>

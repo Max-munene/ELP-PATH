@@ -1,46 +1,211 @@
 <div class="all">
-  <!-- row 1  cards-->
+  <!-- row1 -->
+  <div class="header">
+    <div class="header-icon">
+      <mat-icon>info</mat-icon><span>Dashboard Info</span>
+    </div>
+    <div class="filter-report">
+      <!-- buttons -->
+      <!-- filter -->
+      <button type="button" class="filter" (click)="filterToggle()">
+        <mat-icon>filter_alt</mat-icon> Filter
+      </button>
+      <!-- report -->
+      <button type="button" class="report-download">
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+        />
+        <span class="material-symbols-outlined"> cloud_download </span>
+        Download Report
+      </button>
+    </div>
+  </div>
+  <!-- ===============end of row 1=============================== -->
+
+  <!-- row2 -->
+  <div class="table-head-nav" *ngIf="filterstatus">
+    <!-- formfield-header -->
+    <div class="formfield-header">
+      <mat-icon>filter_alt</mat-icon>
+      <label class="form-label0">Filter Dashboard by</label>
+    </div>
+
+    <!--  formfield-flex-->
+    <div class="formfield-flex">
+      <!-- formfield-item -->
+      <div class="formfield-item">
+        <label class="form-label">Country</label>
+        <div class="forminput-flex">
+          <div class="duration-days1">
+            <mat-select
+              placeholder="Select"
+              [(ngModel)]="country"
+              (selectionChange)="applyFilter()"
+            >
+              <mat-option value="Kenya">Kenya</mat-option>
+              <mat-option value="Uganda">Uganda </mat-option>
+              <mat-option value="Rwanda">Rwanda</mat-option>
+              <mat-option value="Tanzania">Tanzania</mat-option>
+            </mat-select>
+          </div>
+        </div>
+      </div>
+      <!-- formfield-item-end -->
+
+      <!-- formfield-item -->
+      <div class="formfield-item">
+        <label class="form-label">Region</label>
+        <div class="forminput-flex">
+          <div class="duration-days1">
+            <mat-select
+              placeholder="Select"
+              [(ngModel)]="region"
+              (selectionChange)="applyFilter()"
+            >
+              <mat-option value="Nairobi">Nairobi</mat-option>
+              <mat-option value="Kampala">Kampala</mat-option>
+              <mat-option value="Burundi">Burundi</mat-option>
+              <mat-option value="Mombasa">Mombasa</mat-option>
+            </mat-select>
+          </div>
+        </div>
+      </div>
+      <!-- formfield-item-end -->
+      <!-- formfield-item -->
+      <div class="formfield-item">
+        <label class="form-label">Cluster</label>
+        <div class="forminput-flex">
+          <div class="duration-days1">
+            <mat-select
+              placeholder="Select"
+              [(ngModel)]="cluster"
+              (selectionChange)="applyFilter()"
+            >
+              <mat-option
+                *ngFor="let cluster of clusterOptions"
+                [value]="cluster.name"
+              >
+                {{ cluster.name }}
+              </mat-option>
+            </mat-select>
+          </div>
+        </div>
+      </div>
+      <!-- formfield-item-end -->
+
+      <!-- formfield-item -->
+      <div class="formfield-item">
+        <label class="form-label">Branch</label>
+        <div class="forminput-flex">
+          <div class="duration-days1">
+            <mat-select
+              placeholder="Select"
+              [(ngModel)]="country"
+              (selectionChange)="applyFilter()"
+            >
+              <mat-option
+                *ngFor="let branch of branchOptions"
+                value="branch.branchName"
+                >{{ branch.branchName }}</mat-option
+              >
+            </mat-select>
+          </div>
+        </div>
+      </div>
+      <!-- formfield-item-end -->
+
+      <!-- formfield-item -->
+      <div class="formfield-item">
+        <label class="form-label">Gender</label>
+        <div class="forminput-flex">
+          <div class="duration-days1">
+            <mat-select
+              placeholder="Select"
+              [(ngModel)]="gender"
+              (selectionChange)="applyFilter()"
+            >
+              <mat-option value="MALE">MALE</mat-option>
+              <mat-option value="FEMALE">FEMALE</mat-option>
+            </mat-select>
+          </div>
+        </div>
+      </div>
+      <!-- formfield-item-end -->
+    </div>
+  </div>
+  <!-- ============================================================================== -->
+
+  <!-- cards-container-->
   <div class="card-container">
     <!-- Total Scholars card -->
-    <div class="single-card"><app-scholars-card></app-scholars-card></div>
+    <div class="single-card" routerLink="/scholarstable">
+      <app-scholars-card
+        [country]="country"
+        [region]="region"
+        [cluster]="cluster"
+        [gender]="gender"
+      ></app-scholars-card>
+    </div>
 
     <!-- Total Applications card -->
-    <div class="single-card">
+    <!-- <div class="single-card">
       <app-applications-card></app-applications-card>
-    </div>
+    </div> -->
     <!-- Total elps card -->
-    <div class="single-card"><app-elps-card></app-elps-card></div>
-
-    <!-- Total Expenditure card -->
     <div class="single-card">
-      <app-expenditure-card></app-expenditure-card>
+      <app-elps-card></app-elps-card>
     </div>
+
     <!-- Total SWTFs card -->
     <div class="single-card">
       <app-wtfs-card></app-wtfs-card>
     </div>
+    <!-- Total Elimu -->
+    <div class="single-card">
+      <app-admin-elimu-count-card></app-admin-elimu-count-card>
+    </div>
+    <!-- Total Tvet -->
+    <div class="single-card">
+      <app-admin-tvet-count-card></app-admin-tvet-count-card>
+    </div>
+    <!-- Total Global -->
+    <div class="single-card">
+      <app-admin-total-globalscholars-card></app-admin-total-globalscholars-card>
+    </div>
+
+    <!-- Total Expenditure card -->
+    <!-- <div class="single-card">
+      <app-expenditure-card></app-expenditure-card>
+    </div> -->
   </div>
   <!-- row 2  graphs container-->
-  <!-- <div class="graphs-container"> -->
-  <!-- scholars graph -->
-  <!-- <div class="graph">
+  <div class="graphs-container">
+    <!-- awarding status graph -->
+    <!-- <div class="graph">
+      <app-admin-awarding-status-graph></app-admin-awarding-status-graph>
+    </div> -->
+
+    <!-- scholars Category graph -->
+
+    <div class="graph">
       <app-admin-scholar-graph></app-admin-scholar-graph>
-    </div> -->
-  <!-- applications graph -->
-  <!-- <div class="graph">
-      <app-admin-applications-graph></app-admin-applications-graph>
-    </div> -->
-  <!-- elps graph -->
-  <!-- <div class="graph">
-      <app-admin-elps-graph></app-admin-elps-graph>
-    </div> -->
-  <!-- expenditure -->
-  <!-- <div class="graph">
-      <app-admin-expenditure-graph></app-admin-expenditure-graph>
-    </div> -->
-  <!-- wtfs -->
-  <!-- <div class="graph">
+    </div>
+
+    <!-- Gender graph -->
+
+    <div class="graph">
+      <app-admin-scholargender-graph></app-admin-scholargender-graph>
+    </div>
+
+    <!-- wtfs -->
+    <div class="graph">
       <app-admin-wtfs-graph></app-admin-wtfs-graph>
-    </div> -->
-  <!-- </div> -->
+    </div>
+
+    <!-- expenditure -->
+    <div class="graph">
+      <app-admin-expenditure-graph></app-admin-expenditure-graph>
+    </div>
+  </div>
 </div>

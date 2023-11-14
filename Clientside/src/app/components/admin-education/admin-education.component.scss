@@ -16,6 +16,7 @@
     justify-content: left;
     align-items: center;
     width: 80%;
+    gap: 30px;
     p {
       font-weight: 500;
     }
@@ -23,6 +24,7 @@
       color: #6259ca;
     }
   }
+
   .add-grades {
     display: flex;
     width: 20%;
@@ -75,4 +77,23 @@
     font-size: 18px;
     color: #6259ca;
   }
+}
+
+.add-school {
+  display: flex;
+  color: #6259ca;
+  align-items: center;
+  cursor: default;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px;
+  .mat-icon {
+    font-size: 20px;
+  }
+}
+.add-school:hover {
+  color: #a32a29;
+}
+.select_school {
+  width: 200px;
 }

@@ -2,11 +2,14 @@
   <!-- row 1 -->
   <div class="row-1">
     <div class="profile-image">
-      <img src="assets/images/face.png" height="60" />
+      <div class="image">
+        <img [src]="userimageUrl" *ngIf="userimageUrl" />
+        <mat-icon *ngIf="!userimageUrl">person</mat-icon>
+      </div>
     </div>
     <div class="exit-post">
       <div class="button">
-        <button>
+        <button mat-dialog-close matTooltip="Close" matTooltipClass="close">
           <img src="assets/images/x.svg" height="20" />
         </button>
       </div>
@@ -14,38 +17,50 @@
   </div>
   <!-- row 2 -->
   <div class="post-content">
-    <div class="post-input-text">
-      <textarea
-        placeholder="Write something..."
-        rows="5"
-        cols="50"
-        name="Geeks"
-        wrap="hard"
-      ></textarea>
-    </div>
-    <!-- action -->
-    <div class="actions">
-      <div class="single-action">
-        <button>
-          <mat-icon>photo</mat-icon>
+    <form [formGroup]="postForm" (ngSubmit)="submit()">
+      <div class="post-input-text">
+        <textarea
+          placeholder="Write something..."
+          rows="5"
+          cols="50"
+          name="Geeks"
+          wrap="hard"
+          formControlName="description"
+        ></textarea>
+      </div>
+      <!-- action -->
+      <div class="actions">
+        <input
+          type="file"
+          id="imagefile"
+          name="file"
+          (change)="onFileChange($event)"
+          style="display: none"
+          accept="image/*"
+        />
+        <div class="single-action">
+          <label
+            for="imagefile"
+            matTooltip="Upload photo"
+            matTooltipClass="close"
+            ><mat-icon>photo</mat-icon></label
+          >
+          <div *ngIf="imageUrl" class="image-item">
+            <img [src]="imageUrl" alt="Post Image" />
+          </div>
+        </div>
+      </div>
+      <!-- send -->
+      <div class="send-post">
+        <button
+          mat-button
+          class="send-post-button"
+          type="submit"
+          (keydown.enter)="submit()"
+        >
+          <mat-icon>send</mat-icon>Post
         </button>
       </div>
-      <div class="single-action">
-        <button>
-          <mat-icon>video_library</mat-icon>
-        </button>
-      </div>
-      <div class="single-action">
-        <button>
-          <mat-icon>calendar_today</mat-icon>
-        </button>
-      </div>
-    </div>
-    <!-- send -->
-    <div class="send-post">
-      <button mat-button class="send-post-button">
-        <mat-icon>send</mat-icon>Post
-      </button>
-    </div>
+    </form>
   </div>
 </div>

@@ -1,0 +1,15 @@
+<div class="main-container">
+    <div class="card">
+        <p>Verification</p>
+        <p>Enter your OTP here</p>
+    </div>
+<div class="otpform">
+    <input type="text" maxlength="1" value={{otp}} *ngFor="let otp of otpget"/>
+</div>
+<div class="button">
+    <button mat-raised-button color="primary">Verify</button>
+</div>
+<div class="card1">
+    <p>Didn't get an OTP? <a>Resend</a></p>
+</div>
+</div>

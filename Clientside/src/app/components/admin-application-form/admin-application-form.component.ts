@@ -1,7 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { HttpServiceService } from 'src/app/services/http-service.service';
-import { FormBuilder } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import {
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+  MatDialog,
+} from '@angular/material/dialog';
+import { AdminAddbranchFormComponent } from '../admin-addbranch-form/admin-addbranch-form.component';
 
 @Component({
   selector: 'app-admin-application-form',
@@ -9,54 +14,140 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./admin-application-form.component.scss'],
 })
 export class AdminApplicationFormComponent {
+  // Declare class properties
   userId!: string;
-  //applications status options
-  applicationstatus: any[] = [
-    { value: 'AWAITING', viewValue: 'Awaiting' },
-    { value: 'AWARDED', viewValue: 'Awarded' },
-    { value: 'NOT_AWARDED', viewValue: 'Not Awarded' },
+  url!: string;
+  urlGetBranch!: string;
+  urlGetSchool!: string;
+  urlLinkApplicationSchool!: string;
+  applicationform: FormGroup; // Form group for the application form
+
+  // Initialize branch and school options arrays
+  branchOptions!: any[];
+  schoolOptions!: any[];
+  genderOptions: string[] = ['MALE', 'FEMALE'];
+  locationOptions: string[] = [
+    'BARINGO',
+    'BOMET',
+    'BUNGOMA',
+    'BUSIA',
+    'ELGEYO_MARAKWET',
+    'EMBU',
+    'GARISSA',
+    'HOMA_BAY',
+    'ISIOLO',
+    'KAJIADO',
+    'KAKAMEGA',
+    'KERICHO',
+    'KIAMBU',
+    'KILIFI',
+    'KIRINYAGA',
+    'KISII',
+    'KISUMU',
+    'KITUI',
+    'KWALE',
+    'LAIKIPIA',
+    'LAMU',
+    'MACHAKOS',
+    'MAKUENI',
+    'MANDERA',
+    'MARSABIT',
+    'MERU',
+    'MIGORI',
+    'MOMBASA',
+    'MURANGA',
+    'NAIROBI_CITY',
+    'NAKURU',
+    'NANDI',
+    'NAROK',
+    'NYAMIRA',
+    'NYANDARUA',
+    'NYERI',
+    'SAMBURU',
+    'SIAYA',
+    'TAITA_TAVETA',
+    'TANA_RIVER',
+    'THARAKA_NITHI',
+    'TRANS_NZOIA',
+    'TURKANA',
+    'UASIN_GISHU',
+    'VIHIGA',
+    'WAJIR',
+    'WEST_POKOT',
   ];
-  //branch options
-  branchOptions: any[] = [
-    { value: 'NAIROBI', viewValue: 'NAIROBI' },
-    { value: 'KISUMU', viewValue: 'KISUMU' },
-    { value: 'NAKURU', viewValue: 'NAKURU' },
-    { value: 'MACHAKOS', viewValue: 'MACHAKOS' },
-    { value: 'MOMBASA', viewValue: 'MOMBASA' },
-    { value: 'THIKA', viewValue: 'THIKA' },
-    { value: 'JUJA', viewValue: 'JUJA' },
-    { value: 'SAMBURU', viewValue: 'SAMBURU' },
-    { value: 'NYERI', viewValue: 'NYERI' },
-    { value: 'KIAMBU', viewValue: 'KIAMBU' },
-    { value: 'MERU', viewValue: 'MERU' },
-  ];
+
   constructor(
     private http: HttpServiceService,
-    private fb: FormBuilder,
-    public dialogRef: MatDialogRef<AdminApplicationFormComponent>
-  ) {}
-  // form builder
-  applicationform = this.fb.group({
-    applicantFirstName: [''],
-    applicantLastName: [''],
-    applicationStatus: [''],
-    dateOfApplication: [''],
-    dateOfAwarding: [''],
-    dateOfInterview: [''],
-    branch: [''],
-  });
 
-  url!: string;
-  ngOnInit() {
-    this.url = this.http.serverUrl + 'applications/add-new-application';
+    private fb: FormBuilder,
+    public dialog: MatDialog,
+    public dialogRef: MatDialogRef<AdminApplicationFormComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+    // Initialize the application form using FormBuilder
+    this.applicationform = this.fb.group({
+      applicantFirstName: ['', Validators.required],
+      applicantLastName: ['', Validators.required],
+      applicationStatus: ['', Validators.required],
+      dateOfApplication: ['', Validators.required],
+      applicantGender: ['', Validators.required],
+      applicantDOB: ['', Validators.required],
+      location: ['', Validators.required],
+      scholarCode: [null],
+      dateOfAwarding: [''],
+      dateOfInterview: [''],
+      branch: this.fb.group({
+        id: ['', Validators.required],
+      }),
+    });
   }
 
+  ngOnInit() {
+    // Initialize URL for HTTP request
+    this.url = this.http.serverUrl + 'applications/add-new-application';
+
+    // Fetch branch options from the server
+    this.getBranch();
+    this.defaultStatus();
+  }
+
+  // Set default application status if accessed from specific data
+  defaultStatus() {
+    if (this.data.data === 'wtfs') {
+      this.applicationform.get('applicationStatus')?.setValue('AWARDED');
+      console.log(this.applicationform.get('applicationStatus')?.value);
+    } else {
+      this.applicationform.get('applicationStatus')?.setValue('AWAITING');
+      console.log(this.applicationform.get('applicationStatus')?.value);
+    }
+  }
+
+  // Fetch branch data from the server
+  getBranch() {
+    this.urlGetBranch = this.http.serverUrl + 'branch/all'; // URL to fetch branch data
+    this.http.getData(this.urlGetBranch).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.branchOptions = response; // Set branch options array
+        console.log(this.branchOptions);
+      },
+      error: (error) => {
+        console.log('Error:', error);
+      },
+      complete: () => {},
+    });
+  }
+
+  // Handle form submission
   submit() {
     console.log(this.applicationform.value);
+    // Submit application form data to the server
+
     this.http.postData(this.url, this.applicationform.value).subscribe({
       next: (response) => {
         console.log('POST request successful:', response);
         console.log(this.applicationform.value);
+
         this.dialogRef.close();
 
         // Handle the response data here
@@ -67,6 +158,23 @@ export class AdminApplicationFormComponent {
         // Handle the error here
       },
       complete: () => {},
+    });
+  }
+
+  // open bio dialog
+  addbranchDialog(): void {
+    // Open the dialog using the MatDialog service
+    const dialogRef: MatDialogRef<AdminAddbranchFormComponent> =
+      this.dialog.open(AdminAddbranchFormComponent, {
+        width: '60%', // Set the width of the dialog
+
+        data: { data: '' }, // You can pass data to the dialog component using the `data` property
+      });
+
+    // Handle the dialog result (if needed)
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+      this.ngOnInit();
     });
   }
 }

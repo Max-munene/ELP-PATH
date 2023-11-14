@@ -1,0 +1,86 @@
+<div class="main-container">
+  <div class="container">
+    <div class="form-container">
+      <form
+        [formGroup]="adminform"
+        class="education-form"
+        (ngSubmit)="submit()"
+      >
+        <!-- form field -->
+        <div class="form-field">
+          <!-- label -->
+          <label class="form-label">First Name </label>
+          <!-- input -->
+          <input
+            type="text"
+            name="firstName"
+            placeholder="eg. Denis"
+            formControlName="firstName"
+          />
+        </div>
+        <!-- form field -->
+        <div class="form-field">
+          <!-- label -->
+          <label class="form-label">Last Name </label>
+          <!-- input -->
+          <input
+            type="text"
+            name="lastName"
+            placeholder="eg. Mutuku"
+            formControlName="lastName"
+          />
+        </div>
+        <!-- form field -->
+        <div class="form-field">
+          <!-- label -->
+          <label class="form-label">Email </label>
+          <!-- input -->
+          <input
+            type="text"
+            name="userEmail"
+            placeholder="eg. mutuku@gmail.com"
+            formControlName="userEmail"
+          />
+        </div>
+
+        <!-- form field -->
+        <div class="form-field">
+          <!-- label -->
+          <label class="form-label">Password </label>
+          <!-- input -->
+          <input
+            type="text"
+            name="userPassword"
+            placeholder="eg. 123559hfd"
+            formControlName="userPassword"
+          />
+        </div>
+        <!-- form field -->
+        <div class="form-field">
+          <!-- label -->
+          <label class="form-label">Role </label>
+
+          <!-- select -->
+          <div formGroupName="role">
+            <mat-select formControlName="id" name="id">
+              <mat-option *ngFor="let role of rolesOptions" [value]="role.id">
+                {{ role.roleName | titlecase }}
+              </mat-option>
+            </mat-select>
+          </div>
+        </div>
+
+        <div class="save-button">
+          <button
+            (keydown.enter)="(submit)"
+            type="submit"
+            class="button"
+            [disabled]="adminform.invalid"
+          >
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

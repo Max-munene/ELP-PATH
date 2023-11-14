@@ -1,24 +1,59 @@
 <!-- Nav Bar -->
-<mat-toolbar color="primary" class="toolbar mat-elevation-z8">
+
+<nav color="" class="nav">
   <!-- Left Nav -->
+
   <div class="navbar-search">
-    <div></div>
+    <img src="assets/images/equity-bank-logo.png" routerLink="/home" />
+
+    <form action="" method="GET" class="lg:hidden block">
+      <app-search-nav></app-search-nav>
+    </form>
   </div>
 
   <!-- Right Menu -->
   <div class="navbar-menu">
     <!-- Home -->
-    <button routerLink="/home" mat-button><mat-icon>home</mat-icon>Home</button>
+    <button routerLink="/home" mat-button>
+      <mat-icon>home</mat-icon><span class="nav-item">Home</span>
+    </button>
 
     <!-- Notification -->
-    <button mat-button>
-      <mat-icon>notifications</mat-icon>
-      Notifications
+    <button mat-button [matMenuTriggerFor]="notifications">
+      <mat-icon>notifications</mat-icon
+      ><span
+        class="nav-item"
+        matBadge="2"
+        matBadgeSize="small"
+        class="demo-section"
+      >
+        Notifications</span
+      >
     </button>
+    <mat-menu #notifications="matMenu">
+      <div class="media">
+        <!-- <div class="main-img-user"></div> -->
+        <div class="media-body">
+          <p>
+            <strong>EGF</strong> Scheduled an activity <br />
+            <span>Oct 13 02:56am</span>
+          </p>
+        </div>
+      </div>
+      <div class="media">
+        <!-- <div class="main-img-user"></div> -->
+        <div class="media-body">
+          <p>
+            <strong>UON Chapter</strong> Posted a New Event! <br />
+            <span>Oct 24 08:56am</span>
+          </p>
+        </div>
+      </div>
+    </mat-menu>
 
     <!-- Me Avatar Menu -->
     <button mat-button [matMenuTriggerFor]="menu">
-      <mat-icon>account_circle</mat-icon>Me
+      <mat-icon>account_circle</mat-icon><span class="nav-item">Me</span>
     </button>
 
     <!-- Sub Menu -->
@@ -29,11 +64,14 @@
       </button>
 
       <!-- Account Settings -->
+      <button mat-menu-item routerLink="/user_profile">
+        <mat-icon>person</mat-icon>Profile
+      </button>
       <button mat-menu-item>
-        <mat-icon>settings</mat-icon>Account Settings
+        <mat-icon>settings</mat-icon>AccountSettings
       </button>
     </mat-menu>
   </div>
-</mat-toolbar>
 
-<!-- =========================================================================== -->
+  <!-- =========================================================================== -->
+</nav>

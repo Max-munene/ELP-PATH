@@ -1,6 +1,7 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, Inject } from '@angular/core';
 import { HttpServiceService } from 'src/app/services/http-service.service';
 import { NgForm } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 @Component({
   selector: 'app-career-form',
   templateUrl: './career-form.component.html',
@@ -14,15 +15,18 @@ export class CareerFormComponent {
   companyName!: string;
   title!: string;
   userId!: string;
-  constructor(private http: HttpServiceService) {}
+  constructor(
+    private http: HttpServiceService,
+    public dialogRef: MatDialogRef<CareerFormComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
   url!: string;
   ngOnInit() {
-    const storedData = localStorage.getItem('userData');
-
-    if (storedData) {
-      const parsedData = JSON.parse(storedData);
-      this.userId = parsedData.id;
+    const userData = localStorage.getItem('userData');
+    if (userData) {
+      const parsedData = JSON.parse(userData);
       // Use the parsed data in your application
+      this.userId = parsedData.id;
       this.url = this.http.serverUrl + 'career/' + this.userId + '/create';
     }
   }
@@ -34,6 +38,7 @@ export class CareerFormComponent {
         console.log(this.careerform.value);
         // Handle the response data here
         // localStorage.setItem('token', JSON.stringify(response));
+        this.dialogRef.close();
       },
       error: (error) => {
         console.log('Error:', error);

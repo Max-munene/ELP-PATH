@@ -1,45 +1,80 @@
 <div class="main-container">
+  <div class="exit-post">
+    <div class="button">
+      <button mat-dialog-close matTooltip="Close" matTooltipClass="close">
+        <img src="assets/images/x.svg" height="20" />
+      </button>
+    </div>
+  </div>
   <div class="container">
     <div class="form-container">
-      <form #eduform="ngForm" class="education-form" (ngSubmit)="submit()">
+      <form [formGroup]="eduForm" class="education-form" (ngSubmit)="submit()">
         <!-- form field -->
-        <div class="form-field">
+        <div class="form-field"><span>Add Education</span>
           <!-- label -->
           <label class="form-label">Institution Name </label>
-          <!-- input -->
-          <input
-            type="text"
-            name="school_name"
-            placeholder="eg. Elimu University"
-            required
-            [(ngModel)]="school_name"
-          />
+          <mat-select formControlName="school_name" name="institution">
+            <mat-option
+              *ngFor="let school of institutionOptions"
+              [value]="school"
+            >
+              {{ school.name }}
+            </mat-option>
+          </mat-select>
         </div>
+
         <!-- form field -->
         <div class="form-field">
-          <!-- label -->
-          <label class="form-label">Course </label>
-          <!-- input -->
-          <input
-            type="text"
-            name="course"
-            placeholder="eg. BSc. Science"
-            required
-            [(ngModel)]="course"
-          />
+          <label for="" class="form-label">Cluster</label>
+          <mat-select
+            formControlName="clusters"
+            name="clusters"
+            (valueChange)="getCourses()"
+          >
+            <mat-option
+              *ngFor="let cluster of clusterOptions"
+              [value]="cluster.id"
+            >
+              {{ cluster.name }}
+            </mat-option>
+          </mat-select>
         </div>
+
         <!-- form field -->
-        <div class="form-field">
-          <!-- label -->
-          <label class="form-label">Grade </label>
-          <!-- input -->
-          <input
+        <div class="form-field" *ngIf="courses">
+          <label class="form-label"> Courses</label>
+          <mat-select formControlName="course" name="course">
+            <mat-option *ngFor="let course of courseOptions" [value]="course">
+              {{ course.name }}
+            </mat-option>
+          </mat-select>
+        </div>
+
+        <!-- form field -->
+        <!-- <div class="form-field"> -->
+        <!-- label -->
+        <!-- <label class="form-label">Grade </label> -->
+        <!-- input -->
+        <!-- <input
             type="text"
-            name="grade"
+            formControlName="grade"
             placeholder="eg. First Class Honors, B+"
             required
-            [(ngModel)]="grade"
           />
+        </div> -->
+
+        <div class="form-field">
+          <!-- input -->
+          <mat-select
+            type="text"
+            formControlName="grade"
+            placeholder="Grade"
+            required
+          >
+            <mat-option *ngFor="let grade of grades" value="grade">{{
+              grade
+            }}</mat-option></mat-select
+          >
         </div>
 
         <!-- form field -->
@@ -51,12 +86,12 @@
             <!-- start date -->
             <div class="date-start">
               <label class="form-label">Start date</label>
-              <input type="date" name="start_date" [(ngModel)]="start_date" />
+              <input type="date" formControlName="start_date" />
             </div>
             <!-- end date -->
             <div class="date-end">
               <label class="form-label">Complete date</label>
-              <input type="date" name="end_date" [(ngModel)]="end_date" />
+              <input type="date" formControlName="completion_date" />
             </div>
           </div>
         </div>

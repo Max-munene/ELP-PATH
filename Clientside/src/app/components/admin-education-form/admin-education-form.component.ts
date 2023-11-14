@@ -50,7 +50,6 @@ export class AdminEducationFormComponent {
 
   // form builder
   eduform = this.fb.group({
-    schoolName: [''],
     closingGrade: [''],
     openingGrade: [''],
     midTermGrade: [''],

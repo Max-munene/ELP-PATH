@@ -1,0 +1,39 @@
+.main-container{
+    display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  border-radius: 10px;
+  max-width: 460px;
+  height: 60vh;
+}
+
+.otpform{
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    
+    
+
+    input{
+        box-sizing: border-box;
+  width: 36px;
+  height: 42px;
+  font-size: 36px;
+  border-radius: 6px;
+  padding: 0;
+  border: 1px solid black;
+  text-align: center;
+    }
+}
+// button{
+//     border: 0;
+//     // padding: 20px 20px;
+//     color: #ffffff;
+//     border-radius: 30%;
+//     // background: #0359ae;
+// }

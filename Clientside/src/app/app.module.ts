@@ -1,13 +1,21 @@
 import { NgModule } from '@angular/core';
+import { MatNativeDateModule } from '@angular/material/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CurrencyPipe } from '@angular/common';
+import { DecimalPipe } from '@angular/common';
+// import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
+import { NgApexchartsModule } from 'ng-apexcharts';
+
+import { NgChartsModule } from 'ng2-charts';
 
 // angular material imports
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -24,13 +32,14 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
-import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule, MatNavList } from '@angular/material/list';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDividerModule } from '@angular/material/divider';
-
-// chart js
-import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatStepperModule } from '@angular/material/stepper';
 
 // admin
 import { AdminScholarGraphComponent } from './components/admin-scholar-graph/admin-scholar-graph.component';
@@ -69,7 +78,6 @@ import { CareerFormComponent } from './components/career-form/career-form.compon
 import { EducationFormComponent } from './components/education-form/education-form.component';
 import { SocialMediaFormComponent } from './components/social-media-form/social-media-form.component';
 import { ImageFormComponent } from './components/image-form/image-form.component';
-import { HttpServiceService } from './services/http-service.service';
 import { ProfilePicComponent } from './components/profile-pic/profile-pic.component';
 import { CareerComponent } from './components/career/career.component';
 import { BioComponent } from './components/bio/bio.component';
@@ -86,12 +94,109 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { AdminApplicationFormComponent } from './components/admin-application-form/admin-application-form.component';
 import { AdminEducationFormComponent } from './components/admin-education-form/admin-education-form.component';
 import { AdminExpenseFormComponent } from './components/admin-expense-form/admin-expense-form.component';
+import { AdminAddSchoolFormComponent } from './components/admin-add-school-form/admin-add-school-form.component';
+import { AdminAwardingStatusGraphComponent } from './components/admin-awarding-status-graph/admin-awarding-status-graph.component';
+import { AdminAddChaptersFormComponent } from './components/admin-add-chapters-form/admin-add-chapters-form.component';
+import { AdminChaptersComponent } from './components/admin-chapters/admin-chapters.component';
+import { AdminRecentActivitiesCardComponent } from './components/admin-recent-activities-card/admin-recent-activities-card.component';
+import { AdminScheduledActivitiesCardComponent } from './components/admin-scheduled-activities-card/admin-scheduled-activities-card.component';
+import { AdminOngoingActivitiesCardComponent } from './components/admin-ongoing-activities-card/admin-ongoing-activities-card.component';
+import { AdminChapterProfileComponent } from './components/admin-chapter-profile/admin-chapter-profile.component';
+import { AdminChapterActivitiesComponent } from './components/admin-chapter-activities/admin-chapter-activities.component';
+import { AdminChapterEventsComponent } from './components/admin-chapter-events/admin-chapter-events.component';
+import { AdminChapterHomeComponent } from './components/admin-chapter-home/admin-chapter-home.component';
+import { AdminChapterEventsCardComponent } from './components/admin-chapter-events-card/admin-chapter-events-card.component';
+import { AdminChapterActivitiesCardComponent } from './components/admin-chapter-activities-card/admin-chapter-activities-card.component';
+import { AdminEventsHomeComponent } from './components/admin-events-home/admin-events-home.component';
+import { AdminAddActivityFormComponent } from './components/admin-add-activity-form/admin-add-activity-form.component';
+import { AdminAddEventFormComponent } from './components/admin-add-event-form/admin-add-event-form.component';
+import { AdminRolesComponent } from './components/admin-roles/admin-roles.component';
+import { AdminAddRolesFormComponent } from './components/admin-add-roles-form/admin-add-roles-form.component';
+import { AdminViewComponent } from './components/admin-view/admin-view.component';
+import { AddAdminFormComponent } from './components/add-admin-form/add-admin-form.component';
+import { AdminBranchChampionCardComponent } from './components/admin-branch-champion-card/admin-branch-champion-card.component';
+import { AdminSuperadminCardComponent } from './components/admin-superadmin-card/admin-superadmin-card.component';
+import { AdminChapterleaderCardComponent } from './components/admin-chapterleader-card/admin-chapterleader-card.component';
+import { AdminTableComponent } from './components/admin-table/admin-table.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
+
+// service
+import { HttpServiceService } from './services/http-service.service';
+import { AdminApplicationsPermissionComponent } from './components/admin-applications-permission/admin-applications-permission.component';
+import { AdminEventsPermissionComponent } from './components/admin-events-permission/admin-events-permission.component';
+import { AdminActivityPermissionComponent } from './components/admin-activity-permission/admin-activity-permission.component';
+import { AdminChaptersPermissionComponent } from './components/admin-chapters-permission/admin-chapters-permission.component';
+import { AdminRolesPermissionComponent } from './components/admin-roles-permission/admin-roles-permission.component';
+import { AdminAdminsPermissionComponent } from './components/admin-admins-permission/admin-admins-permission.component';
+import { HttpinterceptorInterceptor } from './httpinterceptor.interceptor';
+import { AdminApplicationAwardformComponent } from './components/admin-application-awardform/admin-application-awardform.component';
+import { AdminApplicationRejecformComponent } from './components/admin-application-rejecform/admin-application-rejecform.component';
+import { AdminAddElpFormComponent } from './components/admin-add-elp-form/admin-add-elp-form.component';
+import { AdminMakeElpFormComponent } from './components/admin-make-elp-form/admin-make-elp-form.component';
+import { UserProfileCardComponent } from './components/user-profile-card/user-profile-card.component';
+import { UserProfileDialogComponent } from './components/user-profile-dialog/user-profile-dialog.component';
+import { MorePeopleCardComponent } from './components/more-people-card/more-people-card.component';
+import { SideBarMenuHomeComponent } from './components/side-bar-menu-home/side-bar-menu-home.component';
+import { UserEventsComponent } from './components/user-events/user-events.component';
+import { UserActivitiesComponent } from './components/user-activities/user-activities.component';
+import { UserChapterHomeComponent } from './components/user-chapter-home/user-chapter-home.component';
+import { PasswordResetFormComponent } from './components/password-reset-form/password-reset-form.component';
+import { ForgotPasswordFormComponent } from './components/forgot-password-form/forgot-password-form.component';
+import { UserProfilePermissionComponent } from './components/user-profile-permission/user-profile-permission.component';
+import { UserFeedsPermissionComponent } from './components/user-feeds-permission/user-feeds-permission.component';
+import { AdminDeleteroleFormComponent } from './components/admin-deleterole-form/admin-deleterole-form.component';
+import { AdminDeleteFormComponent } from './components/admin-delete-form/admin-delete-form.component';
+import { AdminAddbranchFormComponent } from './components/admin-addbranch-form/admin-addbranch-form.component';
+import { AdminJobsComponent } from './components/admin-jobs/admin-jobs.component';
+import { AdminJobcardListComponent } from './components/admin-jobcard-list/admin-jobcard-list.component';
+import { AdminJobProfileComponent } from './components/admin-job-profile/admin-job-profile.component';
+import { AdminAddjobFormComponent } from './components/admin-addjob-form/admin-addjob-form.component';
+import { PermissionsServiceService } from './services/permissions-service.service';
+import { AdminAddOrganizationFormComponent } from './components/admin-add-organization-form/admin-add-organization-form.component';
+import { AdminLoginComponent } from './components/admin-login/admin-login.component';
+import { AdminElimuTableComponent } from './components/admin-elimu-table/admin-elimu-table.component';
+import { AdminTVETTableComponent } from './components/admin-tvet-table/admin-tvet-table.component';
+import { AdminHubsComponent } from './components/admin-hubs/admin-hubs.component';
+import { AdminHubHomeComponent } from './components/admin-hub-home/admin-hub-home.component';
+import { AdminHubEventsComponent } from './components/admin-hub-events/admin-hub-events.component';
+import { AdminHubEventsCardComponent } from './components/admin-hub-events-card/admin-hub-events-card.component';
+import { AdminHubProfileComponent } from './components/admin-hub-profile/admin-hub-profile.component';
+import { AdminHubActivitiesComponent } from './components/admin-hub-activities/admin-hub-activities.component';
+import { AdminHubActivitiesCardComponent } from './components/admin-hub-activities-card/admin-hub-activities-card.component';
+import { AdminHubleaderCardComponent } from './components/admin-hubleader-card/admin-hubleader-card.component';
+import { AdminAddHubsFormComponent } from './components/admin-add-hubs-form/admin-add-hubs-form.component';
+import { HubComponent } from './components/hub/hub.component';
+import { AdminTvetCountCardComponent } from './components/admin-tvet-count-card/admin-tvet-count-card.component';
+import { AdminElimuCountCardComponent } from './components/admin-elimu-count-card/admin-elimu-count-card.component';
+
+import { AdminAddScholarComponent } from './components/admin-add-scholar/admin-add-scholar.component';
+
+import { SearchNavComponent } from './components/search-nav/search-nav.component';
+import { DashboardDataService } from './dashboard-data.service';
+import { SkillsComponent } from './components/skills/skills.component';
+import { AdminRegionalChaptersComponent } from './components/admin-regional-chapters/admin-regional-chapters.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AdminAddScholarFormComponent } from './components/admin-add-scholar-form/admin-add-scholar-form.component';
+import { SkillsFormComponent } from './components/skills-form/skills-form.component';
+import { UserFeedbackComponent } from './components/user-feedback/user-feedback.component';
+import { AdminUserfeebackComponent } from './components/admin-userfeeback/admin-userfeeback.component';
+import { ServiceService } from './services/service.service';
+import { AdminAddSpoltlightComponent } from './components/admin-add-spoltlight/admin-add-spoltlight.component';
+import { AdminScholarsTableComponent } from './components/admin-scholars-table/admin-scholars-table.component';
+import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
+import { OtpFormComponent } from './components/otp-form/otp-form.component';
+
+import { AdminTotalGlobalscholarsCardComponent } from './components/admin-total-globalscholars-card/admin-total-globalscholars-card.component';
+import { AdminScholargenderGraphComponent } from './components/admin-scholargender-graph/admin-scholargender-graph.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     HubsComponent,
+    HubComponent,
     NavbarComponent,
     SideBarMenuComponent,
     FeedsComponent,
@@ -135,18 +240,107 @@ import { AdminExpenseFormComponent } from './components/admin-expense-form/admin
     ImageFormComponent,
     ProfilePicComponent,
     CareerComponent,
+    HomeComponent,
     BioComponent,
     EducationComponent,
     AdminApplicationFormComponent,
     AdminEducationFormComponent,
     AdminExpenseFormComponent,
+    AdminAddSchoolFormComponent,
+    AdminAwardingStatusGraphComponent,
+    AdminAddChaptersFormComponent,
+    AdminChaptersComponent,
+    AdminRecentActivitiesCardComponent,
+    AdminScheduledActivitiesCardComponent,
+    AdminOngoingActivitiesCardComponent,
+    AdminChapterProfileComponent,
+    AdminChapterActivitiesComponent,
+    AdminChapterEventsComponent,
+    AdminChapterHomeComponent,
+    AdminChapterEventsCardComponent,
+    AdminChapterActivitiesCardComponent,
+    AdminEventsHomeComponent,
+    AdminAddActivityFormComponent,
+    AdminAddEventFormComponent,
+    AdminRolesComponent,
+    AdminAddRolesFormComponent,
+    AdminViewComponent,
+    AddAdminFormComponent,
+    AdminBranchChampionCardComponent,
+    AdminSuperadminCardComponent,
+    AdminChapterleaderCardComponent,
+    AdminTableComponent,
+    AdminApplicationsPermissionComponent,
+    AdminEventsPermissionComponent,
+    AdminActivityPermissionComponent,
+    AdminChaptersPermissionComponent,
+    AdminRolesPermissionComponent,
+    AdminAdminsPermissionComponent,
+    AdminApplicationAwardformComponent,
+    AdminApplicationRejecformComponent,
+    AdminAddElpFormComponent,
+    AdminMakeElpFormComponent,
+    UserProfileCardComponent,
+    UserProfileDialogComponent,
+    MorePeopleCardComponent,
+    SideBarMenuHomeComponent,
+    UserEventsComponent,
+    UserActivitiesComponent,
+    UserChapterHomeComponent,
+    PasswordResetFormComponent,
+    ForgotPasswordFormComponent,
+    UserProfilePermissionComponent,
+    UserFeedsPermissionComponent,
+    AdminDeleteroleFormComponent,
+    AdminDeleteFormComponent,
+    AdminAddbranchFormComponent,
+    AdminJobsComponent,
+    AdminJobcardListComponent,
+    AdminJobProfileComponent,
+    AdminAddjobFormComponent,
+    AdminAddOrganizationFormComponent,
+    AdminLoginComponent,
+    AdminElimuTableComponent,
+    AdminTVETTableComponent,
+    AdminHubsComponent,
+    AdminHubHomeComponent,
+    AdminHubEventsComponent,
+    AdminHubEventsCardComponent,
+    AdminHubProfileComponent,
+    AdminHubActivitiesComponent,
+    AdminHubActivitiesCardComponent,
+    AdminHubleaderCardComponent,
+    AdminAddHubsFormComponent,
+    HubComponent,
+    AdminTvetCountCardComponent,
+    AdminElimuCountCardComponent,
+    AdminAddScholarComponent,
+
+    LandingPageComponent,
+    SearchNavComponent,
+    AdminRegionalChaptersComponent,
+    FooterComponent,
+    AdminAddScholarFormComponent,
+    SkillsFormComponent,
+    UserFeedbackComponent,
+    AdminUserfeebackComponent,
+    AdminAddSpoltlightComponent,
+    AdminScholarsTableComponent,
+    TermsAndConditionsComponent,
+    OtpFormComponent,
+
+    AdminTotalGlobalscholarsCardComponent,
+    AdminScholargenderGraphComponent,
   ],
 
   imports: [
+    MatExpansionModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
     MatTooltipModule,
     MatDialogModule,
     MatBadgeModule,
@@ -168,11 +362,32 @@ import { AdminExpenseFormComponent } from './components/admin-expense-form/admin
     MatExpansionModule,
     MatListModule,
     MatDividerModule,
-    CanvasJSAngularChartsModule,
     FormsModule,
     ReactiveFormsModule,
+    MatRadioModule,
+    MatProgressBarModule,
+    MatCheckboxModule,
+    MatSnackBarModule,
+    MatStepperModule,
+    // CanvasJSAngularChartsModule,
+    NgApexchartsModule,
+    NgChartsModule,
+    SkillsComponent,
+    FontAwesomeModule,
   ],
-  providers: [HttpServiceService],
+  providers: [
+    ServiceService,
+    HttpServiceService,
+    PermissionsServiceService,
+    DashboardDataService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpinterceptorInterceptor,
+      multi: true,
+    },
+    CurrencyPipe,
+    DecimalPipe,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

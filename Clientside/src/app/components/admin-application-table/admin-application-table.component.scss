@@ -1,9 +1,9 @@
 .table-container {
-  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 .table-head-nav {
   margin-top: 15px;
@@ -23,32 +23,24 @@
   gap: 5%;
   h2 {
     color: #6259ca;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 500;
   }
 }
 input {
-  padding-left: 20px;
-  height: 40px;
-  width: 250px;
-  border: 0;
-  border-radius: 25px;
+  border: 1px solid #e8e8f7;
   outline: none;
-  border: 0;
-  background-color: white;
-
-  // padding: 8px 8px 8px 50px;
+  padding: 0.6rem 0.7rem;
+  background-color: #fff;
+  border-radius: 7px;
+  font-size: 14px;
 }
 
 input::placeholder {
-  padding-left: 20px;
-  color: #5b626b;
-  font-weight: 400;
-}
-input:focus {
-  outline: none;
-  border: 0;
-  // padding-left: 20px;
+  color: rgba(0, 0, 0, 0.2);
+
+  font-weight: 600;
+  font-size: 14px;
 }
 
 .add-applicant {
@@ -64,27 +56,43 @@ input:focus {
 }
 .table {
   width: 95%;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 th {
-  color: #000000de;
-  font-size: 14px;
+  color: rgba(0, 0, 0, 0.87);
+  font-size: 12px;
   font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.2;
 }
 td {
   font-size: 13px;
   font-weight: 400;
+  color: rgba(0, 0, 0, 0.8);
+  text-transform: capitalize;
 }
 .journey {
-  background-color: #6259ca;
-  color: #ffffff;
+  background-color: rgba(240, 112, 187, 0.15);
+  color: #f1388b;
   border: 0;
   border-radius: 8px;
-  padding: 6px 12px 6px 12px;
 }
+::ng-deep .tooltip {
+  font-size: 13px;
+}
+
 .profile {
-  background-color: #04b386;
-  color: #ffffff;
+  background-color: rgba(111, 234, 163, 0.2);
+  color: #19b159;
   border: 0;
   border-radius: 8px;
-  padding: 6px 12px 6px 12px;
+  margin-right: 5px;
+}
+button:disabled {
+  background-color: rgba(0, 0, 0, 0.12);
+  color: rgba(0, 0, 0, 0.38);
+  font-weight: 500;
+  border: 0;
 }

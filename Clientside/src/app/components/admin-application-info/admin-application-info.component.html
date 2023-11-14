@@ -9,15 +9,15 @@
         <div class="details-card-item">
           <p>Name</p>
           <p class="applicant-text" *ngIf="application_data">
-            {{ application_data.applicantFirstName }}
-            {{ application_data.applicantLastName }}
+            {{ application_data.applicantFirstName | titlecase }}
+            {{ application_data.applicantLastName | titlecase }}
           </p>
         </div>
         <!-- column 2 -->
         <div class="details-card-item">
           <p>Award status</p>
           <p class="applicant-text" *ngIf="application_data">
-            {{ application_data.applicationStatus }}
+            {{ application_data.applicationStatus | titlecase }}
           </p>
         </div>
 
@@ -32,7 +32,7 @@
         <div class="details-card-item">
           <p>Branch</p>
           <p class="applicant-text" *ngIf="application_data">
-            {{ application_data.branch }}
+            {{ application_data.branch.branchName | titlecase }}
           </p>
         </div>
 
@@ -57,12 +57,14 @@
         <!-- column 1 -->
         <div class="details-card-item">
           <p>Interview Date</p>
-          <p class="applicant-text">20/07/2023</p>
+          <p class="applicant-text">
+            {{ application_data?.dateOfInterview }}
+          </p>
         </div>
         <!-- column 2 -->
         <div class="details-card-item">
           <p>Uploads</p>
-          <p class="applicant-upload">PhoebeNyakio.pdf</p>
+          <p class="applicant-upload">Info.pdf</p>
         </div>
 
         <!-- column 3 -->

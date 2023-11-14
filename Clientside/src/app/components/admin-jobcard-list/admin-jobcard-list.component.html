@@ -1,0 +1,21 @@
+<div class="maincontainter">
+  <div class="subcontainer">
+    <!-- jobcard -->
+    <a 
+      routerLink="jobprofile"
+      class="jobcard-container"
+      *ngFor="let job of data"
+    >
+      <div class="logo">
+        <img [src]="job.jobPoster"/>
+      </div>
+      <div class="info">
+        <div class="position"><p>{{job.jobTitle}}</p></div>
+        <div class="companyname"> {{ job.organization }}</div>
+        <div class="location">{{ job.jobType }}</div>
+        <div class="deadline-date"><span>Contract Deadline :</span><b> Thu, Sep 7th 2023"</b></div>
+      </div>
+    </a>
+  </div>
+</div>
+

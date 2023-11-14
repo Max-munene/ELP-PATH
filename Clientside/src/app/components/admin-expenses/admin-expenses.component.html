@@ -5,9 +5,27 @@
     <div class="expenses-header">
       <div class="school-name">
         <p>School Name :</p>
-        <span>Kathwana High School</span>
+        <span></span>
+        <div class="select_school" [formGroup]="selectSchool">
+          <mat-select
+            formControlName="id"
+            name="id"
+            [placeholder]="schoolPlaceholderValue"
+          >
+            <mat-option
+              *ngFor="let school of schoolOptions"
+              [value]="school.id"
+            >
+              {{ school.schoolName }}
+            </mat-option>
+          </mat-select>
+        </div>
       </div>
-      <div class="add-expense" (click)="expenseformDialog()">
+      <div
+        class="add-expense"
+        (click)="expenseformDialog()"
+        *ngIf="selectSchool.valid"
+      >
         <mat-icon>add_circle_outline</mat-icon>Add Expense
       </div>
     </div>

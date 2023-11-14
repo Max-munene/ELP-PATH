@@ -38,7 +38,6 @@ export class AdminScholarTableComponent {
     'dateOfAwarding',
     'branch',
     'button',
-    'journey',
   ];
   dataSource = new MatTableDataSource();
 

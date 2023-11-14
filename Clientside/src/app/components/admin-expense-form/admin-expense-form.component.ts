@@ -34,7 +34,6 @@ export class AdminExpenseFormComponent {
   ) {}
 
   expenseform = this.fb.group({
-    schoolName: [''],
     shopping: [''],
     schoolFees: [''],
     transport: [''],

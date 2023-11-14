@@ -1,0 +1,57 @@
+<div class="container">
+<div class="card-nav">
+  <div class="header">
+      <div class="header-icon">
+        <mat-icon>school</mat-icon><span>All Institutional Chapters </span>
+      </div>
+      <div class="filter-container">
+      <mat-form-field  class="filter-dropdown">
+        <mat-label >Filter By</mat-label>  
+        <mat-select [(value)]="selectedFilter" 
+                    (selectionChange)="showFilterInput = true">
+                    <mat-option value="scholarCode">chapter Id</mat-option>
+                    <mat-option value="institution">chapter Name</mat-option>                   
+        </mat-select>    
+    </mat-form-field>
+    <div class="filter-input" *ngIf="showFilterInput">
+        <input matInput placeholder="Filter" #filterInput>
+        <mat-icon (click)="applyFilter(filterInput.value)">search</mat-icon>   
+    </div>
+    </div>
+  </div>
+ 
+ 
+</div>
+<div class="chapters-container">
+  <!-- single  chapter card  -->
+
+  <div class="chapter-card" *ngFor="let data of chapterData">
+    <!-- profile image -->
+    <div class="chapter-profile-image">
+      <img [src]="data.imageUrl" *ngIf="data.imageUrl !== null" />
+      <mat-icon *ngIf="data.imageUrl === null">groups</mat-icon>
+    </div>
+    <!-- chapter title -->
+    <div class="chapter-title">
+      <span>{{ data.chapterName | titlecase }}</span>
+    </div>
+    <!-- chater details -->
+    <div class="chapter-details">
+      <p>{{ data.chapterDescription | titlecase }}</p>
+    </div>
+    <!-- view button -->
+    <a [routerLink]="['/admin/chapterhome', data.chapterId]" class="view">
+      <button class="view-button">
+        <span>View</span>
+      </button>
+    </a>
+  </div>
+  <!--------------------------------------------------------------------------------------------------->
+</div>
+  <!-- activity -->
+<div class="activity-container">
+  <app-admin-ongoing-activities-card></app-admin-ongoing-activities-card>
+  <app-admin-recent-activities-card></app-admin-recent-activities-card>
+  <app-admin-scheduled-activities-card></app-admin-scheduled-activities-card>
+</div>
+</div>

@@ -17,6 +17,8 @@
 }
 
 .details-card {
+  padding-top: 5px;
+
   display: flex;
   width: 95%;
   background-color: white;
@@ -37,7 +39,7 @@
       p {
         margin: 10px;
         font-size: 14px;
-        font-weight: 400;
+        font-weight: 500;
       }
     }
   }
@@ -57,7 +59,7 @@
   width: 50px;
 }
 .applicant-text {
-  color: #6259ca;
+  color: #8f8fb1;
 }
 .card-item-button {
   .material-icons {

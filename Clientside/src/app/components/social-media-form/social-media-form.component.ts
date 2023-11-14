@@ -9,7 +9,10 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class SocialMediaFormComponent {
   socialdata!: any;
-
+  urlAddSocials!: string;
+  urlUpdateSocials!: string;
+  userId!: string;
+  socialId!: string;
   url!: string;
   // reactive form ....for builder
   socialForm = this.fb.group({
@@ -18,12 +21,9 @@ export class SocialMediaFormComponent {
     instagram: [''],
     linkedIn: [''],
     twitter: [''],
+    baobab: [''],
   });
 
-  urlAddSocials = this.http.serverUrl + 'socials/1/add';
-  urlUpdateSocials!: string;
-  userId!: string;
-  socialId!: string;
   constructor(
     private http: HttpServiceService,
     private fb: FormBuilder,
@@ -33,47 +33,54 @@ export class SocialMediaFormComponent {
 
   ngOnInit() {
     //========================= set initial values====================================================
+
+    // Retrieve user data from local storage
     const userData = localStorage.getItem('userData');
-    if (userData) {
+
+    if (this.data.data.editAdd) {
+      // Parse user data
+
+      this.userId = this.data.data.id;
+    } else if (userData) {
       const parsedData = JSON.parse(userData);
       this.userId = parsedData.id;
-      this.url = this.http.serverUrl + 'socials/' + this.userId + '/view';
-      this.http.getData(this.url).subscribe({
-        next: (response) => {
-          if (response.length !== 0) {
-            this.socialdata = response[0];
-          }
-          // ==========================check if response data is empty or not===========================
-          if (this.socialdata) {
-            this.urlUpdateSocials =
-              this.http.serverUrl + 'socials/' + this.userId + '/update';
-          } else if (!this.socialdata) {
-            this.urlAddSocials =
-              this.http.serverUrl + 'socials/' + this.userId + '/add';
-          }
-
-          // ===========================prepopulate the form with data from the api response================
-          this.socialForm.patchValue({
-            facebook: this.socialdata.facebook,
-            github: this.socialdata.github,
-            linkedIn: this.socialdata.linkedin,
-            twitter: this.socialdata.twitter,
-            instagram: this.socialdata.instagram,
-          });
-        },
-        error: (error) => {
-          console.log('Error:', error);
-          // Handle the error here
-        },
-        complete: () => {},
-      });
     }
+    this.getSocialMediaData();
+  }
+  getSocialMediaData() {
+    this.url = this.http.serverUrl + 'socials/' + this.userId + '/view';
+    this.http.getData(this.url).subscribe({
+      next: (response) => {
+        console.log('socials', response);
+
+        this.socialdata = response;
+
+        // ===========================prepopulate the form with data from the api response================
+        this.socialForm.patchValue({
+          facebook: this.socialdata.facebook,
+          github: this.socialdata.github,
+          linkedIn: this.socialdata.linkedIn,
+          twitter: this.socialdata.twitter,
+          instagram: this.socialdata.instagram,
+          baobab: this.socialdata.baobab,
+        });
+      },
+      error: (error) => {
+        console.log('Error:', error);
+        // Handle the error here
+      },
+      complete: () => {},
+    });
   }
 
   submit() {
     console.log(this.socialForm.value);
+
     //=============================edit social medial====================================
-    if (this.data.data === 'edit') {
+    if (this.data.data.editAdd === 'edit' || this.data.data === 'edit') {
+      console.log('dddada', this.data.data);
+      this.urlUpdateSocials =
+        this.http.serverUrl + 'socials/' + this.userId + '/update';
       this.http
         .putData(this.urlUpdateSocials, this.socialForm.value)
         .subscribe({
@@ -88,9 +95,11 @@ export class SocialMediaFormComponent {
         });
     }
     //===================================add user social media ===========================
-    else if (this.data.data === 'add') {
+    else if (this.data.data.editAdd === 'add' || this.data.data === 'add') {
+      this.urlAddSocials =
+        this.http.serverUrl + 'socials/' + this.userId + '/add';
       this.http.postData(this.urlAddSocials, this.socialForm.value).subscribe({
-        next: (response) => {
+        next: () => {
           this.dialogRef.close();
         },
         error: (error) => {

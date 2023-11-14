@@ -71,6 +71,21 @@
   width: 96%;
   font-size: 14px;
 }
+.add-branch {
+  display: flex;
+  color: #6259ca;
+  align-items: center;
+  cursor: default;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px;
+  .mat-icon {
+    font-size: 20px;
+  }
+}
+.add-branch:hover {
+  color: #a32a29;
+}
 .calendar-input {
   display: flex;
   width: 95%;
@@ -105,19 +120,31 @@
 .save-button {
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 10px;
-  button {
+  gap: 10px;
+  .button {
     font-weight: 600;
-    // border: 0.5;
     padding: 10px 20px;
-    color: #ffffff;
+    color: #6259ca;
     border-radius: 100px;
-    border-color: #6259ca;
+    border: 1px solid #6259ca;
+    background: #fff;
+  }
+  button:hover {
     background: #6259ca;
+    color: #fff;
+  }
+  button:disabled {
+    background-color: rgba(0, 0, 0, 0.12);
+    color: rgba(0, 0, 0, 0.38);
+    font-weight: 500;
+    border: 0;
   }
 }
+
 ::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
   border-radius: 15px;
 }

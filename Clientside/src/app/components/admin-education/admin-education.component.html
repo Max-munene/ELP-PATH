@@ -5,9 +5,29 @@
     <div class="educations-header">
       <div class="school-name">
         <p>School Name :</p>
-        <!-- <span>Kathwana High School</span> -->
+        <div class="select_school" [formGroup]="selectSchool">
+          <mat-select
+            formControlName="id"
+            name="id"
+            [placeholder]="schoolPlaceholderValue"
+          >
+            <div class="add-school" (click)="addschoolDialog()">
+              <mat-icon>history_edu</mat-icon>Add School
+            </div>
+            <mat-option
+              *ngFor="let school of schoolOptions"
+              [value]="school.id"
+            >
+              {{ school.schoolName }}
+            </mat-option>
+          </mat-select>
+        </div>
       </div>
-      <div class="add-grades" (click)="eduformDialog()">
+      <div
+        class="add-grades"
+        (click)="eduformDialog()"
+        *ngIf="selectSchool.valid"
+      >
         <mat-icon>add_circle_outline</mat-icon>Add Grades
       </div>
     </div>
